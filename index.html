@@ -1,102 +1,192 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="/assets/css/payment-form.css" rel="stylesheet" />
+    <link href="/styles/payment-form.css" rel="stylesheet" />
     <meta charset="utf-8" />
-    <title>My test page</title>
+    <title>SolutionDesign Services- Web Service Client Request</title>
   </head>
   <body>
-    <p>This is my page</p>
+    <p>
+      Please note that this request, if fulfilled, will provide the application
+      group with a domain service account. It then becomes the responsibility of
+      the application group to handle the service account in an appropriate
+      manner. Best practices dictate that network credentials stored in
+      configuration files should always be encrypted.
+    </p>
     <form>
-      <h1>Payment form</h1>
+      <h1>Request Form</h1>
       <p>
         Required fields are followed by
         <strong><abbr title="required">*</abbr></strong
         >.
       </p>
+
+      <h2>Client Information</h2>
       <section>
-        <h2>Contact information</h2>
         <fieldset>
-          <legend>Title</legend>
+          <legend>Environment</legend>
           <ul>
             <li>
               <label for="title_1">
-                <input type="radio" id="title_1" name="title" value="K" />
-                King
+                <input type="radio" id="title_1" name="title" value="N" />
+                Non-Production
               </label>
             </li>
             <li>
               <label for="title_2">
-                <input type="radio" id="title_2" name="title" value="Q" />
-                Queen
-              </label>
-            </li>
-            <li>
-              <label for="title_3">
-                <input type="radio" id="title_3" name="title" value="J" />
-                Joker
+                <input type="radio" id="title_2" name="title" value="P" />
+                Production
               </label>
             </li>
           </ul>
         </fieldset>
-        <p>
-          <label for="name">
-            <span>Name: </span>
-            <strong><abbr title="required">*</abbr></strong>
-          </label>
-          <input type="text" id="name" name="username" />
-        </p>
-        <p>
-          <label for="mail">
-            <span>E-mail: </span>
-            <strong><abbr title="required">*</abbr></strong>
-          </label>
-          <input type="email" id="mail" name="usermail" />
-        </p>
-        <p>
-          <label for="pwd">
-            <span>Password: </span>
-            <strong><abbr title="required">*</abbr></strong>
-          </label>
-          <input type="password" id="pwd" name="password" />
-        </p>
       </section>
       <section>
-        <h2>Payment information</h2>
-        <p>
-          <label for="card">
-            <span>Card type:</span>
-          </label>
-          <select id="card" name="usercard">
-            <option value="visa">Visa</option>
-            <option value="mc">Mastercard</option>
-            <option value="amex">American Express</option>
-          </select>
-        </p>
-        <p>
-          <label for="number">
-            <span>Card number:</span>
-            <strong><abbr title="required">*</abbr></strong>
-          </label>
-          <input type="tel" id="number" name="cardnumber" />
-        </p>
-        <p>
-          <label for="expiration">
-            <span>Expiration date:</span>
-            <strong><abbr title="required">*</abbr></strong>
-          </label>
-          <input
-            type="text"
-            id="expiration"
-            required="true"
-            placeholder="MM/YY"
-            pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
-          />
-        </p>
+        <fieldset>
+          <legend>Application Information</legend>
+          <p>
+            <label for="appname">
+              <span>Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="appname" name="appname" />
+          </p>
+          <p>
+            <label for="acronymname">
+              <span>Acronym: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="acronymname" name="acronymname" />
+          </p>
+
+          <ul>
+            <li>
+              <label for="title_1">
+                <input type="radio" id="title_1" name="title" value="A" />
+                Intranet
+              </label>
+            </li>
+            <li>
+              <label for="title_2">
+                <input type="radio" id="title_2" name="title" value="E" />
+                Internet
+              </label>
+            </li>
+          </ul>
+
+          <p>
+            <label for="csdname">
+              <span>CSD Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="csdname" name="csdname" />
+          </p>
+          <p>
+            <label for="appdesc">Application Description:</label>
+            <input type="textarea" id="appdesc" name="appdescription" rows="3" cols="10"/>
+          </p>
+        </fieldset>
       </section>
       <section>
+        <fieldset>
+          <legend>Contact Information</legend>
+          <p>
+            <label for="managername">
+              <span>Manager Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="managername" name="managername" />
+          </p>
+          <p>
+            <label for="mgrmail">
+              <span>Manager's E-mail: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="email" id="mgrmail" name="mgrmail" />
+          </p>
+
+          <p>
+            <label for="teamleadname">
+              <span>Team Lead's Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="teamleadname" name="teamleadname" />
+          </p>
+          <p>
+            <label for="teamleadmail">
+              <span>Team Lead's E-mail: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="email" id="teamleadmail" name="teamleadmail" />
+          </p>
+
+          <p>
+            <label for="groupmail">
+              <span>Group E-mail: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="email" id="groupmail" name="groupmail" />
+          </p>
+        </fieldset>
+      </section>
+      <section>
+        <fieldset>
+          <legend>EWS Information</legend>
+          <p>Which service do you need access to?</p>
+          <ul>
+            <li>
+              <label for="title_1">
+                <input type="radio" id="title_1" name="title" value="A" />
+                WSAddress
+              </label>
+            </li>
+            <li>
+              <label for="title_2">
+                <input type="radio" id="title_2" name="title" value="E" />
+                WSEMail
+              </label>
+            </li>
+            <li>
+              <label for="title_3">
+                <input type="radio" id="title_3" name="title" value="D" />
+                WSED
+              </label>
+            </li>
+            <li>
+              <label for="title_4">
+                <input type="radio" id="title_4" name="title" value="B" />
+                WSDBLink
+              </label>
+            </li>
+          </ul>
+
+          <p>
+            <label for="acctexpire">
+              <span>Should the account expire?</span>
+            </label>
+            <select id="acctexpire" name="acctexpire">
+              <option value="yes">YES</option>
+              <option value="no">NO</option>
+            </select>
+          </p>
+          <p>
+            <label for="expiredate">
+              <span>Expiration date:</span>
+            </label>
+            <input
+              type="text"
+              id="expiredate"
+              required="false"
+              placeholder="YYYY-MM-YY"
+              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            />
+          </p>
+        </fieldset>
+      </section>
+
+      <section>
         <p>
-          <button type="submit">Validate the payment</button>
+          <button type="submit">Submit Request</button>
         </p>
       </section>
     </form>
