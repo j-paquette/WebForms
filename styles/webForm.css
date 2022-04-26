@@ -31,11 +31,17 @@ input, textarea {
     width: 250px;
     box-sizing: border-box;
     border: 1px solid #999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 input[type=checkbox], input[type=radio] {
     width: auto;
     border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 input:focus, textarea:focus {
@@ -46,7 +52,10 @@ textarea {
     vertical-align: top;
     height: 5em;
     resize: vertical;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    
+  }
 
 fieldset {
     width: 250px;
@@ -56,9 +65,25 @@ fieldset {
 }
 
 button {
-    margin: 20px 0 0 124px;
-}
+
+    /* remove default behavior */
+    appearance:none;
+    -webkit-appearance:none;
+  
+    /* usual styles */
+    padding:10px;
+    border:none;
+    background-color:#3F51B5;
+    color:#fff;
+    font-weight:600;
+    border-radius:5px;
+    width:100%;
+  
+  }
 
 label {
   position: relative;
 }
+
+
+

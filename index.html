@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="/styles/payment-form.css" rel="stylesheet" />
+    <link href="/styles/webForm.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <title>SolutionDesign Services- Web Service Client Request</title>
   </head>
@@ -13,6 +13,7 @@
       manner. Best practices dictate that network credentials stored in
       configuration files should always be encrypted.
     </p>
+
     <form>
       <h1>Request Form</h1>
       <p>
@@ -27,52 +28,63 @@
           <legend>Environment</legend>
           <ul>
             <li>
-              <label for="title_1">
-                <input type="radio" id="title_1" name="title" value="N" />
+              <label for="nonprod">
+                <input type="radio" id="nonprod" name="title" value="N" />
                 Non-Production
               </label>
             </li>
             <li>
-              <label for="title_2">
-                <input type="radio" id="title_2" name="title" value="P" />
+              <label for="prod">
+                <input type="radio" id="prod" name="title" value="P" />
                 Production
               </label>
             </li>
           </ul>
         </fieldset>
-      </section>
-      <section>
+      
         <fieldset>
           <legend>Application Information</legend>
           <p>
             <label for="appname">
-              <span>Name: </span>
+              <span
+                title="The full name listed in the Corporate Solutions Directory (CSD)"
+                >Application Name:
+              </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="text" id="appname" name="appname" />
           </p>
           <p>
             <label for="acronymname">
-              <span>Acronym: </span>
+              <span title="The acronym listed in the CSD">Acronym: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="text" id="acronymname" name="acronymname" />
           </p>
-
-          <ul>
-            <li>
-              <label for="title_1">
-                <input type="radio" id="title_1" name="title" value="A" />
-                Intranet
-              </label>
-            </li>
-            <li>
-              <label for="title_2">
-                <input type="radio" id="title_2" name="title" value="E" />
-                Internet
-              </label>
-            </li>
-          </ul>
+          <p>
+            <label for="apptype">
+              <span>What type of application do you have?</span>
+            </label>
+            <select id="apptype" name="apptype">
+              <option value="windowsapp">Windows Application</option>
+              <option value="windowsservice">Windows Service</option>
+              <option value="windowssmartclient">Windows Smart Client</option>
+              <option value="webappliction">Web Application</option>
+              <option value="webservice">Web Service</option>
+              <option value="othertype">other</option>
+            </select>
+          </p>
+          <p>
+            <label for="appzone">
+              <span title="Add a comment to clarify for the client"
+                >Which zone is your application located?</span
+              >
+            </label>
+            <select id="appzone" name="appzone">
+              <option value="intranet">Intranet</option>
+              <option value="internet">Internet (DMZ/OPS/Intranet)</option>
+            </select>
+          </p>
 
           <p>
             <label for="csdname">
@@ -83,19 +95,18 @@
           </p>
           <p>
             <label for="appdesc">Application Description:</label>
-            <input type="textarea" id="appdesc" name="appdescription" rows="3" cols="10"/>
+            <input type="textarea" id="appdesc" name="appdesc" />
           </p>
         </fieldset>
-      </section>
-      <section>
+      
         <fieldset>
           <legend>Contact Information</legend>
           <p>
-            <label for="managername">
+            <label for="mgrname">
               <span>Manager Name: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="managername" name="managername" />
+            <input type="text" id="mgrname" name="mgrname" />
           </p>
           <p>
             <label for="mgrmail">
@@ -106,67 +117,81 @@
           </p>
 
           <p>
-            <label for="teamleadname">
+            <label for="tlname">
               <span>Team Lead's Name: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="teamleadname" name="teamleadname" />
+            <input type="text" id="tlname" name="tlname" />
           </p>
           <p>
-            <label for="teamleadmail">
+            <label for="tlmail">
               <span>Team Lead's E-mail: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="email" id="teamleadmail" name="teamleadmail" />
+            <input type="email" id="tlmail" name="tlmail" />
           </p>
 
           <p>
-            <label for="groupmail">
+            <label for="gdmail">
               <span>Group E-mail: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="email" id="groupmail" name="groupmail" />
+            <input type="email" id="gdmail" name="gdmail" />
           </p>
         </fieldset>
-      </section>
-      <section>
+      
         <fieldset>
           <legend>EWS Information</legend>
           <p>Which service do you need access to?</p>
           <ul>
             <li>
-              <label for="title_1">
-                <input type="radio" id="title_1" name="title" value="A" />
+              <label for="wsaddress">
+                <input
+                  type="checkbox"
+                  id="wsaddress"
+                  name="title"
+                  value="wsaddress"
+                />
                 WSAddress
               </label>
             </li>
             <li>
-              <label for="title_2">
-                <input type="radio" id="title_2" name="title" value="E" />
+              <label for="wsemail">
+                <input
+                  type="checkbox"
+                  id="wsemail"
+                  name="title"
+                  value="wsemail"
+                />
                 WSEMail
               </label>
             </li>
             <li>
-              <label for="title_3">
-                <input type="radio" id="title_3" name="title" value="D" />
+              <label for="wsed">
+                <input type="checkbox" id="wsed" name="title" value="wsed" />
                 WSED
               </label>
             </li>
             <li>
-              <label for="title_4">
-                <input type="radio" id="title_4" name="title" value="B" />
+              <label for="wsdblink">
+                <input
+                  type="checkbox"
+                  id="wsdblink"
+                  name="title"
+                  value="wsdblink"
+                />
                 WSDBLink
               </label>
             </li>
           </ul>
 
           <p>
-            <label for="acctexpire">
+            <label for="expireacct">
               <span>Should the account expire?</span>
             </label>
-            <select id="acctexpire" name="acctexpire">
-              <option value="yes">YES</option>
-              <option value="no">NO</option>
+            <select id="expireacct" name="expireacct">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
             </select>
           </p>
           <p>
