@@ -71,7 +71,7 @@
               <span title="Separate multiple emails by a comma">Service Account and Password sent to: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="email" id="multiplecontactemails" name="multiplecontactemails" multiple />
+            <input type="email" id="multiplecontactemails" name="multiplecontactemails" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" multiple/>
           </p>
           <p>
             <label for="datereassigned">
