@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="styles/responsive-form.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Solution Design Services (SDS) - New Client Request</title>
+</head>
+<body>
+
+    <h2>New Request Form</h2>
+    <p>Please note that this request, if fulfilled, will provide the application group with a domain service account. 
+        It then becomes the responsibility of the application group to handle the service account in an appropriate manner. 
+        Best practices dictate that network credentials stored in configuration files should always be encrypted.</p>
+    <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+    
+    <div class="container">
+      <form action="/action_page.php">
+        <fieldset>
+            <legend>Application Information</legend>
+            <div class="row">
+                <div class="col-25">
+                  <label for="environment">Application Environment <strong><abbr title="required">*</abbr></strong></label>
+                </div>
+                <div class="col-75">
+                  <select id="environment" name="environment">
+                    <option value="non-production">Non-Production</option>
+                    <option value="production">Production</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+               <div class="col-25">
+                <label for="csdname">Application Name <strong><abbr title="required">*</abbr></strong></label>
+               </div>
+               <div class="col-75">
+                <input type="text" id="csdname" name="cname" placeholder="The name listed in the Corporate Solutions Directory (CSD)..">
+               </div>
+             </div>
+             <div class="row">
+              <div class="col-25">
+                <label for="csdacronym">Acronym <strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="csdacronym" name="csdacronym" placeholder="The acronym listed in the CSD..">
+              </div>
+             </div>
+             <div class="row">
+              <div class="col-25">
+                <label for="apptype">What type of application do you have?</label>
+              </div>
+              <div class="col-75">
+                <select id="apptype" name="apptype">
+                  <option value="windowsapp">Windows Application</option>
+                  <option value="windowsservice">Windows Service</option>
+                  <option value="windowssmartclient">Windows Smart Client</option>
+                  <option value="webapplication">Web Application</option>
+                  <option value="webservice">Web Service</option>
+                  <option value="othertype">other</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="appzone">Which zone is your application located?</label>
+              </div>
+              <div class="col-75">
+                <select id="appzone" name="appzone">
+                  <option value="intranet">Intranet</option>
+                  <option value="internet">Internet (DMZ/OPS/Intranet)</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="appdesc">Application Description</label>
+              </div>
+              <div class="col-75">
+                <textarea id="appdesc" name="appdesc" placeholder="Write the description listed in the CSD.." style="height:200px"></textarea>
+              </div>
+            </div>      
+        </fieldset> 
+        <fieldset>
+          <legend>Contact Information</legend>
+          <div class="row">
+            <div class="col-25">
+              <label for="dirname">Director's Name <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="dirname" name="dirname" placeholder="The name of the director listed in the CSD..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="diremail">Director's Email <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="email" id="diremail" name="diremail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The director's email address..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="mgrname">Manager's Name <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="mgrname" name="mgrname" placeholder="The name of the manager listed in the CSD..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="mgremail">Manager's Email <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="email" id="mgremail" name="mgremail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The manager's email address..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="tlname">Team Lead's Name <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="tlname" name="tlname" placeholder="The name of the team lead listed in the CSD..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="tlemail">Team Lead's Email <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <input type="email" id="tlemail" name="tlemail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The team lead's email address..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <label for="addnames">Additional Contact Name(s)</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="addnames" name="addnames" placeholder="Any additional contact name(s) listed in the CSD..">
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-25">
+              <!--add functionality to check if id="addnames" has a value(s). If so, then the email address should be mandatory-->
+              <label for="addmails">Additional Contact Email(s) </label>
+            </div>
+            <div class="col-75">
+              <!--add functionality to process each email individually-->
+              <input type="email" id="addmails" name="addmails" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="Any additional contact names email address(es)..">
+            </div>
+           </div>    
+        </fieldset>
+        <fieldset>
+          <legend>EWS Information</legend>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsname">Which service(s) do you need access to? <strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <div>
+                <!--Add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <input type="checkbox" id="wsaddress" name="wsaddress">
+                <label for="wsaddress">WSAddress</label>
+              </div>
+              <div>
+                <!--Add functionality, if user checks WSEMail they need to add additional information: Internal email access/Internal & external email access/No-->
+                <!--Add functionality, if user checks WSEMail they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <input type="checkbox" id="wsemail" name="wsemail">
+                <label for="wsemail">WSEMail</label>
+              </div>
+              <div>
+                <!--Add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <input type="checkbox" id="wsed" name="wsed">
+                <label for="wsed">WSED</label>
+              </div>
+              <div>
+                <!--Add functionality, if user checks WSDBLink they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <input type="checkbox" id="wsdblink" name="wsdblink">
+                <label for="wsdblink">WSDBLink</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <!--Add functionality: If user clicks yes, then they need to provide the expiry date-->
+              <label for="expireacct">Should the account expire?</label>
+            </div>
+            <div class="col-75">
+              <select id="expireacct" name="expireacct">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="expirydate">If yes, please provide the expiry date</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="expirydate" name="expirydate" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" placeholder="YYYY-MM-YY">
+            </div>
+           </div>    
+        </fieldset> 
+      <br>
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+      </form>
+    </div>
+    </body>
+    </html>
+    
