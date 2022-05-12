@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="/styles/webForm.css" rel="stylesheet" />
+    <!-- Inside a subdirectory called styles inside the current directory -->
+    <link href="styles/responsive-form.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <title>SolutionDesign Services- Web Service Client Request</title>
   </head>
   <body>
+    <div id="first" class="wow">Hello<div id="second">World</div></div>
+    <span class="wow">Hello<span class="neato">World</span></span>
+    <div id="third">There!</div>
     <p>
       Please note that this request, if fulfilled, will provide the application
       group with a domain service account. It then becomes the responsibility of
@@ -17,11 +21,7 @@
 
     <form action="/client-request-form-page" method="post">
       <h1>Request Form</h1>
-      <p>
-        Required fields are followed by
-        <strong><abbr title="required">*</abbr></strong
-        >.
-      </p>
+      <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
 
       <h2>Client Information</h2>
       <section>
@@ -29,16 +29,12 @@
           <legend>Environment</legend>
           <ul>
             <li>
-              <label for="nonprod">
-                <input type="radio" id="nonprod" name="title" value="N" />
-                Non-Production
-              </label>
+              <input type="radio" id="nonprod" name="title" value="nonprod"/>
+              <label for="nonprod"> Non-Production </label>
             </li>
             <li>
-              <label for="prod">
-                <input type="radio" id="prod" name="title" value="P" />
-                Production
-              </label>
+              <input type="radio" id="prod" name="title" value="prod"/>
+              <label for="prod"> Production </label>
             </li>
           </ul>
         </fieldset>
@@ -46,21 +42,19 @@
         <fieldset>
           <legend>Application Information</legend>
           <p>
-            <label for="appname">
+            <label for="csdname">
               <span
-                title="The full name listed in the Corporate Solutions Directory (CSD)"
-                >Application Name:
-              </span>
+                title="The full name listed in the Corporate Solutions Directory (CSD)">Application Name:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="appname" name="appname" />
+            <input type="text" id="csdname" name="csdname"/>
           </p>
           <p>
             <label for="acronymname">
-              <span title="The acronym listed in the CSD">Acronym: </span>
+              <span title="The acronym listed in the CSD">Acronym:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="acronymname" name="acronymname" />
+            <input type="text" id="acronymname" name="acronymname"/>
           </p>
           <p>
             <label for="apptype">
@@ -76,27 +70,17 @@
             </select>
           </p>
           <p>
-            <label for="appzone">
-              <span title="Add a comment to add specific details for the client"
-                >Which zone is your application located?</span
-              >
+            <label for="appzone" aria-label="Add a comment to add specific details for the client">
+              Which zone is your application located?
             </label>
             <select id="appzone" name="appzone">
               <option value="intranet">Intranet</option>
               <option value="internet">Internet (DMZ/OPS/Intranet)</option>
             </select>
           </p>
-
-          <p>
-            <label for="csdname">
-              <span>CSD Name: </span>
-              <strong><abbr title="required">*</abbr></strong>
-            </label>
-            <input type="text" id="csdname" name="csdname" />
-          </p>
           <p>
             <label for="appdesc">Application Description:</label>
-            <input type="textarea" id="appdesc" name="appdesc" />
+            <textarea cols="30" rows="8" id="appdesc" name="appdesc"></textarea> 
           </p>
         </fieldset>
       
@@ -104,14 +88,14 @@
           <legend>Contact Information</legend>
           <p>
             <label for="mgrname">
-              <span>Manager Name: </span>
+              <span>Manager Name:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="mgrname" name="mgrname" />
+            <input type="text" id="mgrname" name="mgrname"/>
           </p>
           <p>
             <label for="mgrmail">
-              <span>Manager's E-mail: </span>
+              <span>Manager's E-mail:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="email" id="mgrmail" name="mgrmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"/>
@@ -122,19 +106,19 @@
               <span>Team Lead's Name: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="tlname" name="tlname" />
+            <input type="text" id="tlname" name="tlname"/>
           </p>
           <p>
             <label for="tlmail">
-              <span>Team Lead's E-mail: </span>
+              <span>Team Lead's E-mail:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="email" id="tlmail" name="tlmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+            <input type="email" id="tlmail" name="tlmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"/>
           </p>
 
           <p>
             <label for="gdmail">
-              <span>Group E-mail: </span>
+              <span>Group E-mail:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="email" id="gdmail" name="gdmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"/>
@@ -151,8 +135,7 @@
                   type="checkbox"
                   id="wsaddress"
                   name="title"
-                  value="wsaddress"
-                />
+                  value="wsaddress"/>
                 WSAddress
               </label>
             </li>
@@ -162,14 +145,13 @@
                   type="checkbox"
                   id="wsemail"
                   name="title"
-                  value="wsemail"
-                />
+                  value="wsemail"/>
                 WSEMail
               </label>
             </li>
             <li>
               <label for="wsed">
-                <input type="checkbox" id="wsed" name="title" value="wsed" />
+                <input type="checkbox" id="wsed" name="title" value="wsed"/>
                 WSED
               </label>
             </li>
@@ -179,8 +161,7 @@
                   type="checkbox"
                   id="wsdblink"
                   name="title"
-                  value="wsdblink"
-                />
+                  value="wsdblink"/>
                 WSDBLink
               </label>
             </li>
@@ -202,19 +183,17 @@
             <input
               type="text"
               id="expiredate"
-              required="false"
               placeholder="YYYY-MM-YY"
-              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
-            />
+              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"/>
           </p>
         </fieldset>
       </section>
 
-      <section>
+      <div>
         <p>
           <button type="submit">Submit Request</button>
         </p>
-      </section>
+      </div>
     </form>
     <script src="main.js"></script>
   </body>

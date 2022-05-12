@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="/styles/responsiveForm.css" rel="stylesheet" />
+    <!-- Inside a subdirectory called styles inside the current directory -->
+    <link href="styles/responsive-form.css" rel="stylesheet"/>
     <meta charset="utf-8" />
     <title>SolutionDesign Services- Web Service Client Request</title>
   </head>
@@ -25,8 +26,7 @@
       <h1>SF-ML Tracking Form</h1>
       <p>
         Required fields are followed by
-        <strong><abbr title="required">*</abbr></strong
-        >.
+        <strong><abbr title="required">*</abbr></strong>.
       </p>
 
       <h2>Service Account Tracking Form</h2>
@@ -42,15 +42,14 @@
               id="serviceacctname"
               required="true"
               placeholder="SV-SF-ACCTNAME"
-              pattern="/(?i)sv-sf-(?i)[a-z]{0,10}$"
-            />
+              pattern="/(?i)sv-sf-(?i)[a-z]{0,10}$"/>
           </p>
           <p>
             <label for="acctusercreated">
               <span>Account User Created: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="acctusercreated" name="acctusercreated" />
+            <input type="text" id="acctusercreated" name="acctusercreated"/>
           </p>
           <p>
             <label for="acctdatecreated">
@@ -62,13 +61,12 @@
               id="acctdatecreated"
               required="true"
               placeholder="YYYY-MM-YY"
-              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
-            />
+              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"/>
           </p>
           <p>
               <p>Send the Account name and password to the manager and team lead.</p>
             <label for="multiplecontactemails">
-              <span title="Separate multiple emails by a comma">Service Account and Password sent to: </span>
+              <span title="Separate multiple emails by a comma">Service Account and Password sent to:</span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="email" id="multiplecontactemails" name="multiplecontactemails" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" multiple/>
@@ -80,10 +78,8 @@
             <input
               type="text"
               id="datereassigned"
-              required="false"
               placeholder="YYYY-MM-YY"
-              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
-            />
+              pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"/>
           </p>
         </fieldset>
       </section>
