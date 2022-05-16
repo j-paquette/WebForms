@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="styles/responsive-form.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Solution Design Services (SDS) - New Client Request</title>
+  </head>
+  <body>
+    <h2>New Request Form</h2>
+
+    <select onchange="warningaa(this);">
+      <option value="noChoice">Select one..</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <div id="hiddenField" class="row" hidden>
+      <div class="col-25">
+        <label for="expiryDate">If yes, please provide the expiry date</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="expiryDate" name="expiryDate" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" placeholder="YYYY-MM-YY"/>
+      </div>
+    </div>
+    <script src="scripts/hidden-attribute.js"></script>
+  </body>
+</html>
