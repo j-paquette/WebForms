@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="styles/responsive-form.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Solution Design Services (SDS) - New Client Request</title>
+</head>
+<body>
+
+    <h2>New Request Form</h2>
+
+    <form id="form">
+        <label for="pet-select">Choose a pet:</label><br />
+        <select name="pets" multiple id="pet-select">
+            <option selected value="dog">Dog</option>
+            <option selected value="cat">Cat</option>
+            <option value="hamster">Hamster</option>
+            <option value="parrot">Parrot</option>
+            <option value="spider">Spider</option>
+            <option value="goldfish">Goldfish</option>
+        </select>
+        <br /><br />
+        <button type="submit" id="submit">Save</button>
+    </form>
+    <script src="scripts/post-api-webform-example.js"></script>
+</body>
+    
+</html>
