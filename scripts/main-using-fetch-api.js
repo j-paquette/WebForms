@@ -1,9 +1,6 @@
 //To enter mor than one email address, when more than one contact email is needed.
-async function onMainFormSubmit(event){
-    //const csdname = document.getElementById("csdname");
-    //returns the input object
-    //alert(csdname.value);
-  
+async function onMainFormSubmit(event){  
+  try {
     //Prevents reloading the page
     event.preventDefault();
     const data = new FormData(event.target);
@@ -13,24 +10,28 @@ async function onMainFormSubmit(event){
   
     //The Object contains an array in topics that contains all the checked values
     value.ewsServices = data.getAll("ewsServices");
-    
-    //Converts the form data to json
-    //const jsonData = JSON.stringify(value);
-      
-    //console.log(jsonData);
+
+    //TODO: hide the private token here
+    const token = 'Jh7Y-uuxM2eETchK6ifg';
+
+    //TODO: Add a const that contains all the necessary attributes to create a new issue in GitLab
   
     //POST implementation    
-    const response = await fetch('https://reqres.in/api/users', {
+    const response = await fetch('https://reqres.in/api/user', {
         method: 'POST',
         cache: 'default',
         headers: {
             'Content-Type': 'application/json'
+            //Add a "PRIVATE-TOKEN": "" for GitLab API
         },
+        //TODO: change this to stringify each issue data object, not the whole webForm data (value) 
         body: JSON.stringify(value),
     });
     return response.json(); 
-    //go through each field and read the data from form, to build a string
-    //return false;
+  }
+   catch(error){
+     alert(error);
+   } 
   }
   
   /*
@@ -44,14 +45,18 @@ async function onMainFormSubmit(event){
   else
     document.getElementById("hiddenField").hidden = true;
   }
-  
-  //const mainForm=document.getElementById("mainForm");
-  //console.log(mainForm);
-  //mainForm.onsubmit=onMainFormSubmit;
-  
-  const form = document.querySelector('form');
+
+ 
+  //TODO: create a function called sdsRequestInitForm() and add this in the function
+  function sdsRequestInitForm() {
+    const form = document.querySelector('form');
   
   form.addEventListener('submit', onMainFormSubmit);
+  }
+
+  //Call the function to submit the form 
+  sdsRequestInitForm();
+  
   
   
   
