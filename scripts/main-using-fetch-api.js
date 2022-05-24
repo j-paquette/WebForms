@@ -11,9 +11,6 @@ async function onMainFormSubmit(event){
     //The Object contains an array in topics that contains all the checked values
     value.ewsServices = data.getAll("ewsServices");
 
-    //TODO: hide the private token here
-    const token = 'Jh7Y-uuxM2eETchK6ifg';
-
     //TODO: Add a const that contains all the necessary attributes to create a new issue in GitLab
   
     //POST implementation    
