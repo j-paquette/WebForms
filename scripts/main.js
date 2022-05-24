@@ -12,17 +12,17 @@ async function onMainFormSubmit(event){
     value.ewsServices = data.getAll("ewsServices");
 
     //TODO: hide the private token here
-    const token = 'Jh7Y-uuxM2eETchK6ifg';
+    const token = 'abcde';
 
     //TODO: Add a const that contains all the necessary attributes to create a new issue in GitLab
   
     //POST implementation    
-    const response = await fetch('https://reqres.in/api/user', {
+    const response = await fetch('https://gccode.ssc-spc.gc.ca/api/v4/projects/11015/issues/?title=Prod: Request new account access&labels=New Account, PROD&confidential=true&description=This is a short description   &state=opened&assignee_id=1032', {
         method: 'POST',
         cache: 'default',
         headers: {
-            'Content-Type': 'application/json'
-            //Add a "PRIVATE-TOKEN": "" for GitLab API
+            'Content-Type': 'application/json',
+            'PRIVATE-TOKEN': 'token'
         },
         //TODO: change this to stringify each issue data object, not the whole webForm data (value) 
         body: JSON.stringify(value),
