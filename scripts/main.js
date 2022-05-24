@@ -30,7 +30,7 @@ async function onMainFormSubmit(event){
     return response.json(); 
   }
    catch(error){
-     alert(error);
+     alert(error.message);
    } 
   }
   
