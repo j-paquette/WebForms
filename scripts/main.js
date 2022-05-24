@@ -12,7 +12,7 @@ async function onMainFormSubmit(event){
     value.ewsServices = data.getAll("ewsServices");
 
     //TODO: hide the private token here
-    const token = 'abcde';
+    const token = 'abcdef';
 
     //TODO: Add a const that contains all the necessary attributes to create a new issue in GitLab
   
