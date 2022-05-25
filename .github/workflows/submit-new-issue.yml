@@ -1,0 +1,33 @@
+name: new ews request
+
+env:
+   TEST_API_TOKEN: ${{ secrets.TEST_API_TOKEN }}
+
+on:
+   issue:
+      types:
+         - created
+         - opened
+
+jobs:
+   runs-on: ubuntu-latest
+   permissions:
+      issues:
+         write
+   steps:
+     - name: create an issue using REST API
+       run: |
+          curl --request POST \
+          --url https://gccode.ssc-spc.gc.ca/api/v4/projects/11015/issues \
+          --header 'authorization: Bearer ${{ env.TEST_API_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Prod: Request new account access",
+            "body": "This issue was automatically created by the new ews request workflow **${{ github.workflow.submit-new-issue.yml }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            }' \
+          
+       with: 
+          assignee_id: 1032
+          labels: ["New Account", "PROD"]
+          title: 
+
