@@ -139,11 +139,11 @@
            </div>
            <div class="row">
             <div class="col-25">
-              <!--add functionality to check if id="addnames" has a value(s). If so, then the email address should be mandatory-->
+              <!--TODO: add functionality to check if id="addnames" has a value(s). If so, then the email address should be mandatory-->
               <label for="addMails">Additional Contact Email(s) </label>
             </div>
             <div class="col-75">
-              <!--add functionality to process each email individually-->
+              <!--TODO: add functionality to process each email individually-->
               <!--TODO: change the input type=text to add additional emails??-->
               <input type="email" id="addMails" name="addMails" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="Any additional contact names email address(es)..">
             </div>
@@ -157,23 +157,23 @@
             </div>
             <div class="col-75">
               <div>
-                <!--Add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <!--TODO: add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
                 <input type="checkbox" id="wsAddress" name="ewsServices" value="WSAddress">
                 <label for="wsAddress">WSAddress</label>
               </div>
               <div>
-                <!--Add functionality, if user checks WSEMail they need to add additional information: Internal email access/Internal & external email access/No-->
-                <!--Add functionality, if user checks WSEMail they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <!--TODO: add functionality, if user checks WSEMail they need to add additional information: Internal email access/Internal & external email access/No-->
+                <!--TODO: add functionality, if user checks WSEMail they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
                 <input type="checkbox" id="wsEmail" name="ewsServices" value="WSEMail">
                 <label for="wsEmail">WSEMail</label>
               </div>
               <div>
-                <!--Add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <!--TODO: add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
                 <input type="checkbox" id="wsed" name="ewsServices" value="WSED">
                 <label for="wsed">WSED</label>
               </div>
               <div>
-                <!--Add functionality, if user checks WSDBLink they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
+                <!--TODO: add functionality, if user checks WSDBLink they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
                 <input type="checkbox" id="wsDbLink" name="ewsServices" value="WSDBLink">
                 <label for="wsDbLink">WSDBLink</label>
               </div>
@@ -181,7 +181,7 @@
           </div>
           <div class="row">
             <div class="col-25">
-              <!--Add functionality: If user clicks yes, then they need to provide the expiry date-->
+              <!--TODO: add functionality: If user clicks yes, then they need to provide the expiry date-->
               <label for="expireAcct">Should the account expire?</label>
             </div>
             <div class="col-75">
@@ -204,9 +204,10 @@
         </fieldset> 
       <br>
       <div class="row">
-        <input type="submit" value="Submit">
+        <input type="submit" id="submit" value="Submit">
       </div>
       </form>
+      <p><span id="displayMessage"></span></p>
     </div>
     <script src="scripts/main.js"></script>
     </body>
