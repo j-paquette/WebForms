@@ -38,7 +38,7 @@ async function onMainFormSubmit(event){
 
     //POST implementation  
     //TODO: separate into a function createIssue(issueData) and return await response.json()  
-    const response = await fetch('https://gccode.test.ssc-spc.gc.ca/api/v4/projects/11015/issues', {
+    const response = await fetch('https://gccode.ssc-spc.gc.ca/api/v4/projects/11015/issues', {
         method: 'POST',
         cache: 'default',
         headers: {
