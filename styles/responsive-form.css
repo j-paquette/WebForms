@@ -62,7 +62,36 @@
     }
   }
 
-  /*TODO: Add displayMessage css
+
+  /*displayMessage css
+
+  /*common css for all displayMessage(s) */
+  .message {
+    display: block;
+    padding: .2em;
+    border-radius: 5px;
+  }
+
+  /*Success Message */
+  .successMessage {
+    border: 2px solid green;
+    background-color: palegreen;
+  }
+
+  .warningMessage {
+    border: 2px solid orange;
+    background-color: yellow;
+  }
+
+  .errorMessage {
+    border: 2px solid red;
+    background-color: palevioletred;
+  }
+
+  .hiddenMessage {
+    display: none;
+  }
+
 
 
 

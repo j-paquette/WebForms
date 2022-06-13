@@ -14,7 +14,7 @@
     <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
     
     <div class="container">
-      <form id="mainForm">
+      <form id="mainForm" style="background-color:azure">
         <fieldset>
             <legend>Application Information</legend>
             <div class="row">
@@ -192,7 +192,7 @@
               </select>
             </div>
           </div>
-          <div id="hiddenField" class="row" hidden>
+          <div id="expiryDateContainer" class="row" hidden>
             <div class="col-25">
               <label for="expiryDate">If yes, please provide the expiry date</label>
             </div>
@@ -207,7 +207,7 @@
         <input type="submit" id="submit" value="Submit">
       </div>
       </form>
-      <p><span id="displayMessage"></span></p>
+      <p><div class="hiddenMessage" id="displayMessage" onclick="hideMessage()"></div></p>
     </div>
     <script src="scripts/main.js"></script>
     </body>
