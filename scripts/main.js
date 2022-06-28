@@ -14,63 +14,32 @@ async function onMainFormSubmit(event){
     //Calls getFormValue that takes data as parameter and returns formValue.
     const formValue = getFormValue(data);
 
-    //Calls getClientIssueData(formData) and returns issueData
-    const issueData = getClientIssueData(formValue);
+    //const issueData = getIssueDataGCcode(issueData);
+    //Calls createIssueGCcode(getIssueDataGCcode(issueData, formValue) and returns web form data to GCcode Issue Description section  
+    //const responseData = await createIssueGCcode(getIssueDataGCcode(formValue), formValue);
+    
+    const issueData = getWorkItemDataADO(formValue);
+    //Calls createWorkItemADO(issueData, formValue) and returns web form data to ADO Work Item Description section
+    const responseData = await createWorkItemADO(issueData, formValue);
 
-    const responseData = createIssueGCcode(issueData);
+    console.log(responseData); 
 
-    //POST implementation  
-    //TODO: separate into a function createIssue(issueData) and return await response.json() 
-    //TODO: update the api Url to GCcode, when GCcode is available: https://gccode.ssc-spc.gc.ca/api/v4/projects/11015/issues
-    //TODO: redirect the POST to GitLab account until GCcode connection issues are resolved: https://gitlab.com/api/v4/projects/36860236/issues 
-    // const response = await fetch('https://gitlab.com/api/v4/projects/36888795/issues', {
-    //     method: 'POST',
-    //     cache: 'default',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         //For now, no need to hide the token value because it only allows access to users to create/edit an issue, nothing more.
-    //         //Maybe later on, if we want to use WSEMail to send our notification emails (instead of thru GitLab), we'll need to lock it down (using JWT tokens??)
-    //         //If GitHub returns an error because it won't allow me to send a private token as plain text, then I will need to do a GET of API token and send response with the token 
-    //         'PRIVATE-TOKEN': 'glpat-8TZ_SsUyJYBh1N1-GkSg'
-    //     },
-    //     //stringify only the issue body info
-    //     body: JSON.stringify(issueData),
-    // });
-    //Display message to the user that form was submitted successfully
-    //TODO: parse response for successful submit (include the url in the response) 
-    const displayMessage = document.getElementById("displayMessage");
-    //calls showMessage(message, messageType) and returns the message text, MessageType=successMessage
-    //const showMessage = displayMessage.innerHTML.showMessage(message, successMessage);
-    //const [message, messageType] = showMessage();
-    //const showMessage = showMessage();
-    //const successMessage = showMessage[0];
-    //const responseData = await response.json();
-
-    //TODO: create a separate function for showMessages 
-    displayMessage.innerHTML = `Your request has been submitted. You can view it here: <a href="${responseData.web_url}">${responseData.web_url}</a>`;
-    //displayMessage.innerHTML = successMessage.message, `"<a href="${responseData.web_url}">${responseData.web_url}</a>`;
-
-    displayMessage.className = "message successMessage"; 
+    showMessage(`Your request has been submitted. You can view it here: <a href="${responseData.issueUrl}">${responseData.issueUrl}</a>`, "success")
   }
    catch(error){ 
-     //TODO: create a separate function for showMessages    
-     //const displayMessage = document.getElementById("displayMessage");
-     //const errorMessage = showMessage(message, errorMessage);
-     displayMessage.innerHTML = "Unable to contact GCcode, make sure you are connected to the ESDC network."; 
-     //displayMessage.innerHTML = showMessage(message);
-     displayMessage.className = "message errorMessage"; 
+    
+    showMessage("Unable to contact GCcode, make sure you are connected to the ESDC network.", "error"); 
    } 
-
   }
   
+
   /*
     This function sets the expiryDate input field as hidden by default.
     If the user answers: expireAcct=Yes, then expiryDate field is displayed
   */
   function hideExpiryDateOnChange(obj){
     //TODO: check if the data is cached before running the if statement. 
-    //When I refreshed the browser to retest the same data (cached data=YES), it was still set to yes but the date field was hidden
-
+   
     if (obj.value == "yes"){
       document.getElementById("expiryDateContainer").hidden = false;
       //TODO: add require to expiryDate input, to make this entry mandatory
@@ -105,13 +74,13 @@ async function onMainFormSubmit(event){
  /*
   This function gets the form data entered by the user (as a parameter) and returns issueData
  */
- function getClientIssueData(formValue) {
+ function getIssueDataGCcode(formValue) {
 
- //TODO: add labels depending on the type of request (new, modify, non-production, production, WSAddress, WSEMail, WSED, WSDBLink)
-  const issueData = {
-  title: "Prod: Request new account access",
+  const issueDataGCcode = {
+  title: `${formValue.environment}: Request access to ${formValue.ewsServices}`,
   confidential: "true",
-  description: `This is a short description
+  labels: `New, ${formValue.environment}, ${formValue.ewsServices} `,
+  description: `${formValue.appDesc}
 
 | Application Info | |
 | ------ | ------ |
@@ -139,21 +108,22 @@ async function onMainFormSubmit(event){
 | **Should the account expire?** | ${formValue.expireAcct} |
 | **If yes, please provide the expiry date** | ${formValue.expiryDate} |`
     };
-    return issueData;
+    return issueDataGCcode;
  }
 
   /*
   This function creates a new issue in GCcode using the GitLab API, and return await response.json()
   */
-  async function createIssueGCcode(issueData) {
+  async function createIssueGCcode(issueData, formValue) {
+
+    issueData = getIssueDataGCcode(formValue);
+
     const response = await fetch('https://gitlab.com/api/v4/projects/36888795/issues', {
         method: 'POST',
         cache: 'default',
         headers: {
             'Content-Type': 'application/json',
-            //For now, no need to hide the token value because it only allows access to users to create/edit an issue, nothing more.
-            //Maybe later on, if we want to use WSEMail to send our notification emails (instead of thru GitLab), we'll need to lock it down (using JWT tokens??)
-            //If GitHub returns an error because it won't allow me to send a private token as plain text, then I will need to do a GET of API token and send response with the token 
+            //Uses PRIVATE-TOKEN to authorize creating a new issue thru the GitLab API
             'PRIVATE-TOKEN': 'glpat-8TZ_SsUyJYBh1N1-GkSg'
         },
         //stringify only the issue body info
@@ -162,7 +132,103 @@ async function onMainFormSubmit(event){
 
     const responseData = await response.json();
 
-    return responseData;
+    return convertGCcodeResponseValues(responseData);
+  }
+
+  /* 
+  This function returns common response values specific to GCcode
+  */
+  function convertGCcodeResponseValues(responseData){
+    const resultValues = {
+      issueUrl: responseData.web_url
+    };
+
+    return resultValues;
+
+  }
+
+
+ /*
+  This function gets the form data entered by the user (as a parameter) and returns issueData
+ */
+ function getWorkItemDataADO(formValue) {
+
+  const issueDataADO = 
+    [
+      {
+        "op": "add",
+        "path": "/fields/System.Title",
+        "from": null,
+        "value": `${formValue.environment}: Request access to ${formValue.ewsServices}`
+      },
+      {
+        "op": "add",
+        "path": "/fields/System.Tags",
+        "from": null,
+        "value": `New Account, ${formValue.environment}, ${formValue.ewsServices}` 
+      },
+      {
+        "op": "add",
+        "path": "/fields/System.State",
+        "from": null,
+        "value": "New-Nouveau"
+      },
+      {
+        "op": "add",
+        "path": "/fields/System.AreaPath",
+        "from": null,
+        "value": "DevCoP-CdpDev"
+      },
+      {
+        "op": "add",
+        "path": "/fields/System.Description",
+        "from": null,
+        "value": `${formValue.environment}`
+      }
+           
+    ]
+    return issueDataADO;
+  }
+
+
+  /*
+  This function creates a new issue in Azure DevOps (ADO), includes web form data getWorkItemDataADO(formValue) using the ADO API header info, and return await response.json()
+  TODO: Can I refactor to make this a closure function, and nest createWorkItemADO(issueData) inside getWorkItemADO(formValue)??
+  This gives createWorkItemADO(issueData) full access to all the variables & functions in getWorkItemADO(formValue) 
+  and all the variables & functions getWorkItemADO(formValue) has access to.
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#closures
+  */
+  async function createWorkItemADO(issueData, formValue) {
+    //Call getWorkItemDataADO(formValue), to get the web form data, all in the one function
+    issueData = getWorkItemDataADO(formValue); 
+
+    const response = await fetch("https://ado.intra.dmz/projectcollection/DevCoP-CdpDev/_apis/wit/workitems/$Task-T%C3%A2che?api-version=6.0", {
+        method: "POST",
+        cache: "default",
+        headers: {
+            "Content-Type": "application/json-patch+json",
+            //ADO base64 encoded authorization of the Personal Access Token to create Work Items (read & write)
+            "Authorization": `Basic ${btoa("snuvckjdwqinkultvfzggslb7x6q3v6alfm43jp5pqkb3jpomhgq:")}`
+        },
+        //stringify only the issue body info
+        body: JSON.stringify(issueData),
+    });
+
+    const responseData = await response.json();
+
+    return convertADOResponseValues(responseData);
+  }
+
+
+  /*
+    This function returns common response values specific to ADO
+  */
+  function convertADOResponseValues(responseData){
+    const resultValues = {
+      issueUrl: responseData._links.html.href
+    };
+
+    return resultValues;
   }
 
   /*
@@ -170,28 +236,25 @@ async function onMainFormSubmit(event){
     MessageType can be one of: "Error", "Warning" or "success"
   */
   function showMessage(message, messageType){
-    //const displayMessage = document.getElementById("displayMessage");
+    const displayMessage = document.getElementById("displayMessage");
+
+    displayMessage.innerHTML = message;
+    if (messageType == "success" ) {
+      displayMessage.className = "message successMessage"; 
+    }
+    else if(messageType == "error"){
+      displayMessage.className = "message errorMessage"; 
+    }
+    else if (messageType == "warning") {
+      displayMessage.className = "message warningMessage"; 
+    }
+    else {
+      displayMessage.className = "message informationMessage"; 
+    }
   
-    //const message = displayMessage.innerHTML;
-
-    //const errorMessage = "Unable to contact GCcode, make sure you are connected to the ESDC network.";  
-    //const successMessage = `Your request has been submitted. You can view it here: <a href="${responseData.web_url}">${responseData.web_url}</a>`;
-    //const warningMessage = "Your request has been submitted with warnings."
-    //Checks if responseData= true?? then display the success message, otherwise display the error message
-    if (messageType == successMessage ) {
-      message = "Your request has been submitted. You can view it here: "; 
-    }
-    else if(messageType == errorMessage){
-      message = "Unable to contact GCcode. Make sure you are connected to the ESDC network, or that GCcode is available.";
-    }
-    else
-      message = "Your request has been submitted with warnings. Please review your information before submitting.";
-
-    return message, messageType;
    }
  
- 
- 
+
   /*
     This function submits the user's web form data when user presses the submit button
   */
@@ -201,9 +264,10 @@ async function onMainFormSubmit(event){
     form.addEventListener('submit', onMainFormSubmit);
 
     //This will initialize the global event handlers (ie, onchange, etc) in the HTML, when it has finished loading
+    //Fixed: When I refreshed the browser to retest the same data (cached data=YES), it was still set to yes but the date field was hidden
     document.addEventListener('DOMContentLoaded', (event)=> {
       hideExpiryDateOnChange(document.getElementById("expireAcct"));
-      //Can add other items here
+      //Can add other items here...
     })
   }
 

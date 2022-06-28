@@ -88,6 +88,11 @@
     background-color: palevioletred;
   }
 
+  .informationMessage {
+    border: 2px solid gray;
+    background-color: lightgray;
+  }
+
   .hiddenMessage {
     display: none;
   }
