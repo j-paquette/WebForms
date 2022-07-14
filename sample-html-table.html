@@ -9,28 +9,109 @@
   <body>
     <h2>Prod: Request New Account Access</h2>
     <p>This is A short description</p>
-
+    <p>
+      <table>
+        <thead>
+          <tr id="appInfo" class="column-header" scope="column">
+            <th>Application Info</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th id="environment" class="row-header" scope="row">Application Environment</th>
+            <td>${formValue.environment}</td>
+          </tr>
+          <tr>
+            <th id="csdName" class="row-header" scope="row">CSD Application Name</th>
+            <td>${formValue.csdName}</td>
+          </tr>
+          <tr>
+            <th id="csdAcronym" scope="row-header" scope="row">CSD Acronym</th>
+            <td>${formValue.csdAcronym}</td>
+          </tr>
+          <tr>
+            <th id="appType" class="row-header" scope="row">Application Type</th>
+            <td>${formValue.appType}</td>
+          </tr>
+          <tr>
+            <th id="appZone" class="row-header" scope="row">Application Zone</th>
+            <td>${formValue.appZone}</td>
+          </tr>
+          <tr>
+            <th id="appDesc" class="row-header" scope="row">Application Description</th>
+            <td>${formValue.appDesc}</td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <p>
     <table>
-      <tr class="column-header" scope="column">
-        <th>Application Info</th>
-        <th>&nbsp;</th>
-      </tr>
-      <tr>
-        <th class="row-header" scope="row">Application Environment</th>
-        <td>Jack Russell</td>
-      </tr>
-      <tr>
-        <th class="row-header" scope="row">Age</th>
-        <td>16</td>
-      </tr>
-      <tr>
-        <th scope="row-header" scope="row">Owner</th>
-        <td>Mother-in-law</td>
-      </tr>
-      <tr>
-        <th class="row-header" scope="row">How Much Space Can I Write Here: Eating Habits</th>
-        <td>Eats everyone's leftovers</td>
-      </tr>
+      <thead>
+        <tr id="contactInfo" class="column-header" scope="column">
+          <th>Contact Information</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th id="dirName" class="row-header" scope="row">Director's Name</th>
+          <td>Jack Russell</td>
+        </tr>
+        <tr>
+          <th id="dirEmail" class="row-header" scope="row">Director's Email</th>
+          <td>16</td>
+        </tr>
+        <tr>
+          <th id="mgrName" scope="row-header" scope="row">Manager's Name</th>
+          <td>Mother-in-law</td>
+        </tr>
+        <tr>
+          <th id="mgrEmail" class="row-header" scope="row">Manager's Email</th>
+          <td>Eats everyone's leftovers</td>
+        </tr>
+        <tr>
+          <th id="tlName" class="row-header" scope="row">Team Lead's Name</th>
+          <td>Eats everyone's leftovers</td>
+        </tr>
+        <tr>
+          <th id="tlEmail" class="row-header" scope="row">Team Lead's Email</th>
+          <td>Eats everyone's leftovers</td>
+        </tr>
+        <tr>
+          <th id="addNames" class="row-header" scope="row">Additional Contact Name(s)</th>
+          <td>Eats everyone's leftovers</td>
+        </tr>
+        <tr>
+          <th id="addMails" class="row-header" scope="row">Additional Contact Email(s)</th>
+          <td>Eats everyone's leftovers</td>
+        </tr>
+      </tbody>
     </table>
+    </p>
+    <p>
+    <table>
+      <thead>
+        <tr id="ewsInfo" class="column-header" scope="column">
+          <th>EWS Information</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th id="whichService" class="row-header" scope="row">Which service(s) do you need access to?</th>
+          <td>Jack Russell</td>
+        </tr>
+        <tr>
+          <th class="row-header" scope="row">Should the account expire?</th>
+          <td>16</td>
+        </tr>
+        <tr>
+          <th scope="row-header" scope="row">If yes, please provide the expiry date</th>
+          <td>Mother-in-law</td>
+        </tr>
+      </tbody>
+    </table>
+    </p>
   </body>
 </html>
