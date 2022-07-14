@@ -98,30 +98,80 @@ caption {
               </tr>
             </tbody>
           </table>
+          </p>
+          <p>
+          <table>
+            <thead>
+              <tr id="contactInfo" class="column-header" scope="column">
+                <th>Contact Information</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th id="dirName" class="row-header" scope="row">Director's Name</th>
+                <td>${formValue.dirName}</td>
+              </tr>
+              <tr>
+                <th id="dirEmail" class="row-header" scope="row">Director's Email</th>
+                <td>${formValue.dirEmail}</td>
+              </tr>
+              <tr>
+                <th id="mgrName" scope="row-header" scope="row">Manager's Name</th>
+                <td>${formValue.mgrName}</td>
+              </tr>
+              <tr>
+                <th id="mgrEmail" class="row-header" scope="row">Manager's Email</th>
+                <td>${formValue.mgrEmail}</td>
+              </tr>
+              <tr>
+                <th id="tlName" class="row-header" scope="row">Team Lead's Name</th>
+                <td>${formValue.tlName}</td>
+              </tr>
+              <tr>
+                <th id="tlEmail" class="row-header" scope="row">Team Lead's Email</th>
+                <td>${formValue.tlEmail}</td>
+              </tr>
+              <tr>
+                <th id="addNames" class="row-header" scope="row">Additional Contact Name(s)</th>
+                <td>${formValue.addNames}</td>
+              </tr>
+              <tr>
+                <th id="addMails" class="row-header" scope="row">Additional Contact Email(s)</th>
+                <td>${formValue.addMails}</td>
+              </tr>
+            </tbody>
+          </table>
+          </p>
+          <p>
+          <table>
+            <thead>
+              <tr id="ewsInfo" class="column-header" scope="column">
+                <th>EWS Information</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th id="whichService" class="row-header" scope="row">Which service(s) do you need access to?</th>
+                <td>${formValue.ewsServices}</td>
+              </tr>
+              <tr>
+                <th class="row-header" scope="row">Should the account expire?</th>
+                <td>${formValue.expireAcct}</td>
+              </tr>
+              <tr>
+                <th scope="row-header" scope="row">If yes, please provide the expiry date</th>
+                <td>${formValue.expiryDate}</td>
+              </tr>
+            </tbody>
+          </table>
           </p>`
         }
              
       ]
       return issueDataADO;
     }
-
-    // /*
-    // This function creates a link element to apply sample-html-table.css file to the html
-    // */
-    // createHtmlLinkElement(linkElement){
-    //   //create a new link element
-    //   const link = document.createElement("Link");
-
-    //   link.rel = "stylesheet";
-    //   link.type = "text/css";
-    //   link.href = "sample-html-table.css";
-
-    //   //Get the html HEAD element to append the link element to it
-    //   document.getElementsByTagName("head")[0].appendChild(link);
-
-    //   return linkElement;
-    // }
-  
   
     /*
     This function creates a new issue in Azure DevOps (ADO), includes web form data getWorkItemDataADO(formValue) using the ADO API header info, and return await response.json()
@@ -140,7 +190,7 @@ caption {
           headers: {
               "Content-Type": "application/json-patch+json",
               //ADO base64 encoded authorization of the Personal Access Token to create Work Items (read & write)
-              //TODO: ADO has a bug that expires after 30days (even though I chose custom date), create a PAT with a default expiration date (30/60/90 days)
+              //TODO: create a PAT with a default expiration date (30/60/90 days). ADO triggered an HTTPS 401 saying my PAT had expired, even though the expiry date is a week from now, maybe because I chose a custom date??
               "Authorization": `Basic ${btoa("g7lchuq7w7r7lvlptwtjhfcxnhb2emp7evxhqka577qmkyupfl6a:")}`
           },
           //stringify only the issue body info
