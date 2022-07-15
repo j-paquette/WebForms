@@ -38,7 +38,7 @@ async function onMainFormSubmit(event){
     This function sets the expiryDate input field as hidden by default.
     If the user answers: expireAcct=Yes, then expiryDate field is displayed
   */
-  function hideExpiryDateOnChange(obj){
+  function hideEntryFieldOnChange(obj){
     //TODO: check if the data is cached before running the if statement. 
    
     if (obj.value == "yes"){
@@ -49,6 +49,19 @@ async function onMainFormSubmit(event){
       document.getElementById("expiryDateContainer").hidden = true;
     }
       
+  }
+
+  function ewsRequestWorkflow(){
+    //get the selected environment, either "nonProd" or "prod"
+    const selectProd = document.getElementById("environment");
+    //get the selected requestType, either "new" or "modify"
+    const selectNew = document.getElementById("requestType");
+
+    //if user selects both "prod" and "new", unhide the questions/fields related to a new Prod request, and activate the "required" questions
+    //if they select both "prod" and "modify", unhide the questions/fields related to a modify Prod request, and activate the "required" questions 
+    //if they select both "nonProd" and "new", unhide the questions/fields related to a new nonProd request, and activate the "required" questions
+    //if they select both "nonProd" and "modify", unhide the questions/fields related to a modify nonProd request, and activate the "required" questions
+
   }
 
   
