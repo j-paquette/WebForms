@@ -15,49 +15,35 @@
     
     <div class="container">
       <form id="mainForm" style="background-color:azure">
-        <fieldset>
+        <!-- <fieldset>
           <legend>Environment</legend>
           <div class="row">
             <div class="col-25">
               <label for="environment">Application Environment<strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
-              <select id="environment" name="environment">
+              <select id="environment" name="environment" onchange="showQuestionsOnchange(this)">
                 <option value="nonProd">Non-Production</option>
                 <option value="prod">Production</option>
               </select>
             </div>
-          </div>
+          </div> -->
         </fieldset>
         <fieldset>
           <legend>Request Type</legend>
           <div class="row">
             <div class="col-25">
-              <label for="requestType">Is this a NEW request?<strong><abbr title="required">*</abbr></strong></label>
+              <label for="requestType">What type of Request do you need?<strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
-              <select id="requestType" name="requestType">
-                <option value="new">New request</option>
-                <option value="modify">Modify existing request</option>
+              <select id="requestType" name="requestType" onchange="showQuestionsOnchange(this)">
+                <option value="newNonProd">New request - Non-Production</option>
+                <option value="modifyNonProd">Modify request - Non-Production</option>
+                <option value="newProd">New request - Production</option>
+                <option value="modifyProd">Modify request - Production</option>
               </select>
             </div>
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>New Prod request</legend>
-           <!-- TODO: Add fields/questions that only apply to this requestType -->
-        </fieldset>
-        <fieldset>
-          <legend>Modify Prod request</legend>
-          <!-- TODO: Add fields/questions that only apply to this requestType -->
-        </fieldset>
-        <fieldset>
-          <legend>New Non-Prod request</legend>
-          <!-- TODO: Add fields/questions that only apply to this requestType -->
-        </fieldset>
-        <fieldset>
-          <legend>Modify Non-Prod request</legend>
-          <!-- TODO: Add fields/questions that only apply to this requestType -->
         </fieldset>
         <fieldset>
             <legend>Application Information</legend> 
@@ -77,28 +63,28 @@
                 <input type="text" id="csdAcronym" name="csdAcronym" placeholder="The acronym listed in the CSD..">
               </div>
              </div>
-             <div class="row">
+             <div id="newProd" class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Application Version<strong><abbr title="required">*</abbr></strong></label>
+                <label for="appVersion">Application Version<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="The most recent release or incoming release..">
+                <input type="text" id="appVersion" name="appVersion" placeholder="The most recent release or incoming release..">
               </div>
              </div>
-             <div class="row">
+             <div id="newProd" class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Application RFC (ANPR)<strong><abbr title="required">*</abbr></strong></label>
+                <label for="appANPR">Application RFC (ANPR)<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="The most recent release or incoming release..">
+                <input type="text" id="appANPR" name="appANPR" placeholder="The most recent release or incoming release..">
               </div>
               </div>
-              <div class="row">
+              <div id="newProd" class="row" hidden>
                 <div class="col-25">
-                  <label for="newProd">Expected Implementation Date<strong><abbr title="required">*</abbr></strong></label>
+                  <label for="implementDate">Expected Implementation Date<strong><abbr title="required">*</abbr></strong></label>
                 </div>
                 <div class="col-75">
-                  <input type="text" id="newProd" name="newProd" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" placeholder="YYYY-MM-YY">
+                  <input type="text" id="implementDate" name="implementDate" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" placeholder="YYYY-MM-YY">
                 </div>
               </div>
              <div class="row">
@@ -127,108 +113,108 @@
                   </select>
                 </div>
               </div>
-            <div class="row">
+            <div class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Is the Application already in production?<strong><abbr title="required">*</abbr></strong></label>
+                <label for="existInProd">Is the Application already in production?<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="newProd" name="newProd" onchange="hideEntryFieldOnChange(this);">
+                <select id="existInProd" name="existInProd" onchange="showQuestionsOnchange(this);">
                   <option value="noChoice">Select one..</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
               </div>
             </div>
-            <div id="alreadyInProd" class="row" hidden>
+            <div id="modifyProd" class="row" hidden>
               <div class="col-25">
-                <label for="alreadyInProd">If yes, what are the week-day Application support hours?</label>
+                <label for="appSupportWeekday">If yes, what are the week-day Application support hours?</label>
               </div>
               <div class="col-75">
-                <input type="text" id="alreadyInProd" name="alreadyInProd" placeholder="The week-day application support hours..">
+                <input type="text" id="appSupportWeekday" name="appSupportWeekday" placeholder="The week-day application support hours..">
               </div>
             </div>
-            <div id="alreadyInProd" class="row" hidden>
+            <div id="modifyProd" class="row" hidden>
               <div class="col-25">
-                <label for="alreadyInProd">If yes, what are the week-end Application support hours?</label>
+                <label for="appSupportWeekend">If yes, what are the week-end Application support hours?</label>
               </div>
               <div class="col-75">
-                <input type="text" id="alreadyInProd" name="alreadyInProd" placeholder="The week-end application support hours..">
+                <input type="text" id="appSupportWeekend" name="appSupportWeekend" placeholder="The week-end application support hours..">
               </div>
             </div>
-            <div id="alreadyInProd" class="row" hidden>
+            <div id="modifyProd" class="row" hidden>
               <div class="col-25">
-                <label for="alreadyInProd">If yes, what is the criticality classification of your Application?</label>
+                <label for="criticality">If yes, what is the criticality classification of your Application?</label>
               </div>
               <div class="col-75">
-                <input type="text" id="alreadyInProd" name="alreadyInProd" placeholder="The criticality classification of your Application..">
+                <input type="text" id="criticality" name="criticality" placeholder="The criticality classification of your Application..">
               </div>
             </div>
-            <div id="alreadyInProd" class="row" hidden>
+            <div id="modifyProd" class="row" hidden>
               <div class="col-25">
-                <label for="alreadyInProd">If yes, what is the incident support coverage of your Application?</label>
+                <label for="supportCoverage">If yes, what is the incident support coverage of your Application?</label>
               </div>
               <div class="col-75">
-                <input type="text" id="alreadyInProd" name="alreadyInProd" placeholder="The incident support coverage of your Application..">
+                <input type="text" id="supportCoverage" name="supportCoverage" placeholder="The incident support coverage of your Application..">
               </div>
             </div> 
-            <div class="row">
+            <div id="newProd" class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Hosting site for the Application<strong><abbr title="required">*</abbr></strong></label>
+                <label for="appHostSite">Hosting site for the Application<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="The hosting site for the application..">
+                <input type="text" id="appHostSite" name="appHostSite" placeholder="The hosting site for the application..">
               </div>
             </div>
-            <div class="row">
+            <div id="newProd" class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Hosting site for the Database<strong><abbr title="required">*</abbr></strong></label>
+                <label for="dbHostSite">Hosting site for the Database<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="If the application is using WSDBLink..">
+                <input type="text" id="dbHostSite" name="dbHostSite" placeholder="If the application is using WSDBLink..">
               </div>
             </div>
-            <div class="row">
+            <div id="newProd" class="row" hidden>
               <div class="col-25">
-                <label for="newProd">Is there anything special with your application (from a usage point of view)?<strong><abbr title="required">*</abbr></strong></label>
+                <label for="uniqueApp">Is there anything special with your application (from a usage point of view)?<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="newProd" name="newProd" onchange="hideEntryFieldOnChange(this);">
+                <select id="uniqueApp" name="uniqueApp" onchange="hideEntryFieldOnChange(this);">
                   <option value="noChoice">Select one..</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
               </div>
             </div>
-            <div id="uniqueApp" class="row" hidden>
+            <div id="uniqueAppDetails" class="row" hidden>
               <div class="col-25">
-                <label for="uniqueApp">If yes, please provide details</label>
+                <label for="uniqueAppDetails">If yes, please provide details</label>
               </div>
               <div class="col-75">
-                <textarea id="uniqueApp" name="uniqueApp" placeholder="Enter the details of the special instructions for your application.." style="height:200px"></textarea>
+                <textarea id="uniqueAppDetails" name="uniqueAppDetails" placeholder="Enter the details of the special instructions for your application.." style="height:200px"></textarea>
               </div>
             </div>
             <div class="row">
               <div class="col-25">
-                <label for="newProd">Project Team Name<strong><abbr title="required">*</abbr></strong></label>
+                <label for="teamName">Project Team Name<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="Enter your project team name..">
+                <input type="text" id="teamName" name="teamName" placeholder="Enter your project team name..">
               </div> 
             </div>
             <div class="row">
               <div class="col-25">
-                <label for="newProd">Distribution List for the Application Group<strong><abbr title="required">*</abbr></strong></label>
+                <label for="teamDistList">Distribution List for the Application Group<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="Enter the distribution list for the application group..">
+                <input type="text" id="teamDistList" name="teamDistList" placeholder="Enter the distribution list for the application group..">
               </div>
             </div>
             <div class="row">
               <div class="col-25">
-                <label for="newProd">Url to your project in CSD (Corporate Solutions Directory)<strong><abbr title="required">*</abbr></strong></label>
+                <label for="csdUrl">Url to your project in CSD (Corporate Solutions Directory)<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <input type="text" id="newProd" name="newProd" placeholder="Add the CSD Url for your project..">
+                <input type="text" id="csdUrl" name="csdUrl" placeholder="Add the CSD Url for your project..">
               </div>
             </div>
             <div class="row">
@@ -346,7 +332,7 @@
               <label for="expireAcct">Should the account expire?</label>
             </div>
             <div class="col-75">
-              <select id="expireAcct" name="expireAcct" onchange="hideEntryFieldOnChange(this);">
+              <select id="expireAcct" name="expireAcct" onchange="hideExpiryDateOnChange(this);">
                 <option value="noChoice">Select one..</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>

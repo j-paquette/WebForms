@@ -38,7 +38,7 @@ async function onMainFormSubmit(event){
     This function sets the expiryDate input field as hidden by default.
     If the user answers: expireAcct=Yes, then expiryDate field is displayed
   */
-  function hideEntryFieldOnChange(obj){
+  function hideExpiryDateOnChange(obj){
     //TODO: check if the data is cached before running the if statement. 
    
     if (obj.value == "yes"){
@@ -51,17 +51,33 @@ async function onMainFormSubmit(event){
       
   }
 
-  function ewsRequestWorkflow(){
-    //get the selected environment, either "nonProd" or "prod"
-    const selectProd = document.getElementById("environment");
-    //get the selected requestType, either "new" or "modify"
-    const selectNew = document.getElementById("requestType");
-
-    //if user selects both "prod" and "new", unhide the questions/fields related to a new Prod request, and activate the "required" questions
-    //if they select both "prod" and "modify", unhide the questions/fields related to a modify Prod request, and activate the "required" questions 
-    //if they select both "nonProd" and "new", unhide the questions/fields related to a new nonProd request, and activate the "required" questions
-    //if they select both "nonProd" and "modify", unhide the questions/fields related to a modify nonProd request, and activate the "required" questions
-
+  /*
+    This function displays to the user the request as Non-production(nonProd) New by default
+    Depending on the following combination of choices, the web form will display data entry fields ONLY relevant to the type of request/environment:
+    - nonProd, new: Only the questions(elements) with id="newNonProd" and questions common to all request types (no div id) will be displayed. This is the default setting.  
+    - nonProd, modify: Only the questions(elements) with id="modifyNonProd" and questions common to all request types (no div id) will be displayed.
+    - prod, new: Only the questions(elements) with id="newProd" and questions common to all request types (no div id) will be displayed.
+    - prod, modify: Only the questions(elements) with id="modifyProd" and questions common to all request types (no div id) will be displayed.
+  */
+  function showQuestionsOnchange(element){
+    //by default
+    if(element.value=="newNonProd"){
+      //if they select "newNonProd", unhide the questions/fields related to a new nonProd request, and activate the "required" questions
+      document.getElementById("newNonProd").hidden = false;
+    }
+    //TODO: How do I know which question I'm at??
+    else if(element.value=="Yes"){
+      //if they select both "modifyNonProd", unhide the questions/fields related to a modify nonProd request, and activate the "required" questions
+      document.getElementById("modifyNonProd").hidden = false;
+    }
+    else if(element.value=="newProd"){
+      //if user selects both "newProd", unhide the questions/fields related to a new Prod request, and activate the "required" questions
+      document.getElementById("newProd").hidden = false;
+    }
+    else if(element.value=="modifyProd"){
+      //if they select both "modifyProd", unhide the questions/fields related to a modify Prod request, and activate the "required" questions 
+      document.getElementById("modifyProd").hidden = false;
+    }    
   }
 
   
