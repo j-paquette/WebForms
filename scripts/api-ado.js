@@ -1,8 +1,9 @@
 class IssueApi {
-    /*
-  This function gets the form data entered by the user (as a parameter) and returns issueData
-    */
- getWorkItemData(formValue) {
+  /**
+    This function gets the form data entered by the user (as a parameter) and returns issueData.
+    @param formValue The web form data formatted to HTML tables
+  */
+  getWorkItemData(formValue) {
 
     const issueDataADO = 
       [
@@ -173,18 +174,15 @@ caption {
       return issueDataADO;
     }
   
-    /*
-    This function creates a new issue in Azure DevOps (ADO), includes web form data getWorkItemDataADO(formValue) using the ADO API header info, and return await response.json()
-    TODO: Can I refactor to make this a closure function, and nest createWorkItemADO(issueData) inside getWorkItemADO(formValue)??
-    This gives createWorkItemADO(issueData) full access to all the variables & functions in getWorkItemADO(formValue) 
-    and all the variables & functions getWorkItemADO(formValue) has access to.
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#closures
-    */
-    async createWorkItem(formValue) {
-      //Call getWorkItemDataADO(formValue), to get the web form data, all in the one function
-      const issueData = this.getWorkItemData(formValue); 
+  /**
+    This function does a fetch of the web form data, POST the header info and web form data as .json .
+    @param formValue The web form data formatted to HTML tables
+  */
+  async createWorkItem(formValue) {
+    //Call getWorkItemDataADO(formValue), to get the web form data, all in the one function
+    const issueData = this.getWorkItemData(formValue); 
   
-      const response = await fetch("https://ado.intra.dmz/projectcollection/DevCoP-CdpDev/_apis/wit/workitems/$Task-T%C3%A2che?api-version=6.0", {
+    const response = await fetch("https://ado.intra.dmz/projectcollection/DevCoP-CdpDev/_apis/wit/workitems/$Task-T%C3%A2che?api-version=6.0", {
           method: "POST",
           cache: "default",
           headers: {
@@ -195,22 +193,23 @@ caption {
           },
           //stringify only the issue body info
           body: JSON.stringify(issueData),
-      });
+    });
   
-      const responseData = await response.json();
+    const responseData = await response.json();
   
-      return this.convertResponseValues(responseData);
-    }
+    return this.convertResponseValues(responseData);
+  }
   
   
-    /*
-      This function returns common response values specific to ADO
-    */
-    convertResponseValues(responseData){
-      const resultValues = {
-        issueUrl: responseData._links.html.href
+  /**
+    This function returns common response values specific to ADO.
+    @param responseData The ADO api response values
+  */
+  convertResponseValues(responseData){
+    const resultValues = {
+      issueUrl: responseData._links.html.href
       };
   
-      return resultValues;
-    }
+    return resultValues;
+  }
 }

@@ -1,10 +1,9 @@
-/*
-  This function:
-  collects users entered data into formValue obj
-  configures the POST request to the EWS Support project, as a new issue using the GitLab API
-  TODO: this function should call the other functions
-*/
-async function onMainFormSubmit(event){  
+  /**
+    This function collects users entered data into formValue obj. 
+    configures the POST request to the EWS Support project, as a new issue using the GitLab API
+    @param event triggers the functions needed to submit the data to GCcode issue, ADO work item 
+  */
+  async function onMainFormSubmit(event){  
   try {
     //Prevents reloading the page
     event.preventDefault();
@@ -15,10 +14,6 @@ async function onMainFormSubmit(event){
     const formValue = getFormValue(data);
 
     const issueApi = new IssueApi();
-
-    //const issueData = getIssueDataGCcode(issueData);
-    //Calls createIssueGCcode(getIssueDataGCcode(issueData, formValue) and returns web form data to GCcode Issue Description section  
-    //const responseData = await createIssueGCcode(getIssueDataGCcode(formValue), formValue);
     
     //Calls createWorkItemADO(issueData, formValue) and returns web form data to ADO Work Item Description section
     const responseData = await issueApi.createWorkItem(formValue);
@@ -34,9 +29,9 @@ async function onMainFormSubmit(event){
   }
   
 
-  /*
-    This function sets the expiryDate input field as hidden by default.
-    If the user answers: expireAcct=Yes, then expiryDate field is displayed
+  /** 
+    This function sets the expiryDate input field as hidden by default. If the user answers: expireAcct=Yes, then expiryDate field is displayed.
+    @param obj - The select elements from which to take the selected values   
   */
   function hideExpiryDateOnChange(obj){
     //TODO: check if the data is cached before running the if statement. 
@@ -51,44 +46,60 @@ async function onMainFormSubmit(event){
       
   }
 
-  /*
-    This function displays to the user the request as Non-production(nonProd) New by default
-    Depending on the following combination of choices, the web form will display data entry fields ONLY relevant to the type of request/environment:
-    - nonProd, new: Only the questions(elements) with id="newNonProd" and questions common to all request types (no div id) will be displayed. This is the default setting.  
-    - nonProd, modify: Only the questions(elements) with id="modifyNonProd" and questions common to all request types (no div id) will be displayed.
-    - prod, new: Only the questions(elements) with id="newProd" and questions common to all request types (no div id) will be displayed.
-    - prod, modify: Only the questions(elements) with id="modifyProd" and questions common to all request types (no div id) will be displayed.
+  /** 
+    This function shows the next question, depending on which web service you choose in the checkboxes.
+    @param checkBoxElement - The select checkBoxElement where you get the selected values   
   */
-  function showQuestionsOnchange(element){
-    //by default
-    if(element.value=="newNonProd"){
-      //if they select "newNonProd", unhide the questions/fields related to a new nonProd request, and activate the "required" questions
-      document.getElementById("newNonProd").hidden = false;
+  function showEWSCallsPerDayOnClick(checkBoxElement){
+    //TODO: check if the data is cached before running the if statement. 
+     const checkedCategory = checkBoxElement.input[checkBoxElement.dataset].value;
+
+     const targetElements = document.querySelectorAll("[data-calls-per-day]");
+
+      if (obj.value == "yes"){
+        document.getElementById("expiryDateContainer").hidden = false;
+        //TODO: add require to expiryDate input, to make this entry mandatory
+      }
+      else {
+        document.getElementById("expiryDateContainer").hidden = true;
+      }
+        
     }
-    //TODO: How do I know which question I'm at??
-    else if(element.value=="Yes"){
-      //if they select both "modifyNonProd", unhide the questions/fields related to a modify nonProd request, and activate the "required" questions
-      document.getElementById("modifyNonProd").hidden = false;
-    }
-    else if(element.value=="newProd"){
-      //if user selects both "newProd", unhide the questions/fields related to a new Prod request, and activate the "required" questions
-      document.getElementById("newProd").hidden = false;
-    }
-    else if(element.value=="modifyProd"){
-      //if they select both "modifyProd", unhide the questions/fields related to a modify Prod request, and activate the "required" questions 
-      document.getElementById("modifyProd").hidden = false;
-    }    
+
+  /** 
+    This function displays to the user the request as Non-production(nonProd) New by default
+    @param dropDownElement The select elements from which to take the selected values
+  */
+  function showQuestionsOnchange(dropDownElement){
+    //TODO: create a variable/const called element node-list?, research
+    
+    const wantedCategory = dropDownElement.options[dropDownElement.selectedIndex].value;
+    //returns all elements that have a data-category attribute. It doesn't care about the attribute value.
+    const targetElements = document.querySelectorAll("[data-category]");
+    //this will run for each element
+    //fixes the bug: where user can re-select a different choice display the previous chosen fields are re-hidden...TODO: rewrite this...
+    targetElements.forEach(targetElement => {
+      //returns the value of the data-category split by comma. like an array
+      const categories = targetElement.dataset.category.split(",");
+      //check whether the wantedCategory is in the list of categories for targetElement. True or false.
+      const categoryFound = categories.includes(wantedCategory);
+
+      targetElement.hidden = !categoryFound;
+    })
   }
 
   
-  /*Hide message returned to user, after they've submitted their data*/
+  /**
+    This function hides success/fail message returned to user after they've submitted their data.
+  */
   function hideMessage() {
     document.getElementById("displayMessage").className="hiddenMessage";
   }
 
 
-  /*
-    This function gets the form data submitted by the user (as a parameter) and returns formValue
+  /**
+    This function gets the form data submitted by the user (as a parameter) and returns formValue.
+    @param formData the data entered by the user.
   */
   function getFormValue(formData) {
     //Get all the values from the form, but doesn't include input for multiple values such as checkboxes
@@ -101,9 +112,10 @@ async function onMainFormSubmit(event){
  }
 
 
-  /*
-    This function  returns the displayMessage element to create custom messages for the user 
-    MessageType can be one of: "Error", "Warning" or "success"
+  /**
+    This function returns the displayMessage element to create custom messages for the user.
+    @param message The custom message displayed to user after submitting.  
+    @param MessageType can be one of: "Error", "Warning" or "success"
   */
   function showMessage(message, messageType){
     const displayMessage = document.getElementById("displayMessage");
@@ -125,8 +137,8 @@ async function onMainFormSubmit(event){
    }
  
 
-  /*
-    This function submits the user's web form data when user presses the submit button
+  /**
+    This function submits the user's web form data triggered by type="submit".
   */
   function sdsRequestInitForm() {
     const form = document.querySelector('form');
@@ -137,6 +149,7 @@ async function onMainFormSubmit(event){
     //Fixed: When I refreshed the browser to retest the same data (cached data=YES), it was still set to yes but the date field was hidden
     document.addEventListener('DOMContentLoaded', (event)=> {
       hideExpiryDateOnChange(document.getElementById("expireAcct"));
+      showQuestionsOnchange(document.getElementById("requestType"));
       //Can add other items here...
     })
   }

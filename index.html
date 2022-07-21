@@ -15,19 +15,6 @@
     
     <div class="container">
       <form id="mainForm" style="background-color:azure">
-        <!-- <fieldset>
-          <legend>Environment</legend>
-          <div class="row">
-            <div class="col-25">
-              <label for="environment">Application Environment<strong><abbr title="required">*</abbr></strong></label>
-            </div>
-            <div class="col-75">
-              <select id="environment" name="environment" onchange="showQuestionsOnchange(this)">
-                <option value="nonProd">Non-Production</option>
-                <option value="prod">Production</option>
-              </select>
-            </div>
-          </div> -->
         </fieldset>
         <fieldset>
           <legend>Request Type</legend>
@@ -63,7 +50,7 @@
                 <input type="text" id="csdAcronym" name="csdAcronym" placeholder="The acronym listed in the CSD..">
               </div>
              </div>
-             <div id="newProd" class="row" hidden>
+             <div data-category="newProd,modifyProd" class="row" hidden>
               <div class="col-25">
                 <label for="appVersion">Application Version<strong><abbr title="required">*</abbr></strong></label>
               </div>
@@ -71,7 +58,7 @@
                 <input type="text" id="appVersion" name="appVersion" placeholder="The most recent release or incoming release..">
               </div>
              </div>
-             <div id="newProd" class="row" hidden>
+             <div data-category="newProd" class="row" hidden>
               <div class="col-25">
                 <label for="appANPR">Application RFC (ANPR)<strong><abbr title="required">*</abbr></strong></label>
               </div>
@@ -79,7 +66,7 @@
                 <input type="text" id="appANPR" name="appANPR" placeholder="The most recent release or incoming release..">
               </div>
               </div>
-              <div id="newProd" class="row" hidden>
+              <div data-category="newProd" class="row" hidden>
                 <div class="col-25">
                   <label for="implementDate">Expected Implementation Date<strong><abbr title="required">*</abbr></strong></label>
                 </div>
@@ -113,19 +100,19 @@
                   </select>
                 </div>
               </div>
-            <div class="row" hidden>
+            <div class="row">
               <div class="col-25">
                 <label for="existInProd">Is the Application already in production?<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="existInProd" name="existInProd" onchange="showQuestionsOnchange(this);">
+                <select id="existInProd" name="existInProd">
                   <option value="noChoice">Select one..</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
               </div>
             </div>
-            <div id="modifyProd" class="row" hidden>
+            <div data-category="modifyProd" class="row" hidden>
               <div class="col-25">
                 <label for="appSupportWeekday">If yes, what are the week-day Application support hours?</label>
               </div>
@@ -133,7 +120,7 @@
                 <input type="text" id="appSupportWeekday" name="appSupportWeekday" placeholder="The week-day application support hours..">
               </div>
             </div>
-            <div id="modifyProd" class="row" hidden>
+            <div data-category="modifyProd" class="row" hidden>
               <div class="col-25">
                 <label for="appSupportWeekend">If yes, what are the week-end Application support hours?</label>
               </div>
@@ -141,7 +128,7 @@
                 <input type="text" id="appSupportWeekend" name="appSupportWeekend" placeholder="The week-end application support hours..">
               </div>
             </div>
-            <div id="modifyProd" class="row" hidden>
+            <div data-category="modifyProd" class="row" hidden>
               <div class="col-25">
                 <label for="criticality">If yes, what is the criticality classification of your Application?</label>
               </div>
@@ -149,7 +136,7 @@
                 <input type="text" id="criticality" name="criticality" placeholder="The criticality classification of your Application..">
               </div>
             </div>
-            <div id="modifyProd" class="row" hidden>
+            <div data-category="modifyProd" class="row" hidden>
               <div class="col-25">
                 <label for="supportCoverage">If yes, what is the incident support coverage of your Application?</label>
               </div>
@@ -157,7 +144,7 @@
                 <input type="text" id="supportCoverage" name="supportCoverage" placeholder="The incident support coverage of your Application..">
               </div>
             </div> 
-            <div id="newProd" class="row" hidden>
+            <div data-category="newProd" class="row" hidden>
               <div class="col-25">
                 <label for="appHostSite">Hosting site for the Application<strong><abbr title="required">*</abbr></strong></label>
               </div>
@@ -165,7 +152,7 @@
                 <input type="text" id="appHostSite" name="appHostSite" placeholder="The hosting site for the application..">
               </div>
             </div>
-            <div id="newProd" class="row" hidden>
+            <div data-category="newProd" class="row" hidden>
               <div class="col-25">
                 <label for="dbHostSite">Hosting site for the Database<strong><abbr title="required">*</abbr></strong></label>
               </div>
@@ -173,19 +160,19 @@
                 <input type="text" id="dbHostSite" name="dbHostSite" placeholder="If the application is using WSDBLink..">
               </div>
             </div>
-            <div id="newProd" class="row" hidden>
+            <div data-category="newProd" class="row" hidden>
               <div class="col-25">
                 <label for="uniqueApp">Is there anything special with your application (from a usage point of view)?<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="uniqueApp" name="uniqueApp" onchange="hideEntryFieldOnChange(this);">
+                <select id="uniqueApp" name="uniqueApp">
                   <option value="noChoice">Select one..</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
               </div>
             </div>
-            <div id="uniqueAppDetails" class="row" hidden>
+            <div data-category="newProd" class="row" hidden>
               <div class="col-25">
                 <label for="uniqueAppDetails">If yes, please provide details</label>
               </div>
@@ -305,7 +292,7 @@
             <div class="col-75">
               <div>
                 <!--TODO: add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsAddress" name="ewsServices" value="WSAddress">
+                <input type="checkbox" id="wsAddress" name="ewsServices" value="WSAddress" onchange="showEWSCallsPerDayOnClick(this);">
                 <label for="wsAddress">WSAddress</label>
               </div>
               <div>
@@ -325,6 +312,14 @@
                 <label for="wsDbLink">WSDBLink</label>
               </div>
             </div>
+            <div data-calls-per-day="weekEnd" class="row" >
+              <div class="col-25">
+                <label for="addNames">Expected # of calls per day (Typical weekend day)</label>
+              </div>
+              <div class="col-75">
+                <input type="number" id="wsAddressWeekendCalls" name="wsAddressWeekendCalls" placeholder="From 1 to 10000..">
+              </div>
+        </div>
           </div>
           <div class="row">
             <div class="col-25">
