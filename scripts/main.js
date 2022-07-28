@@ -33,7 +33,7 @@
     This function sets the expiryDate input field as hidden by default. If the user answers: expireAcct=Yes, then expiryDate field is displayed.
     @param obj - The select elements from which to take the selected values   
   */
-  function hideExpiryDateOnChange(obj){
+  function showExpiryDateOnChange(obj){
     //TODO: check if the data is cached before running the if statement. 
    
     if (obj.value == "yes"){
@@ -50,28 +50,56 @@
     This function shows the next question, depending on which web service you choose in the checkboxes.
     @param checkBoxElement - The select checkBoxElement where you get the selected values   
   */
-  function showEWSCallsPerDayOnClick(checkBoxElement){
-    //TODO: check if the data is cached before running the if statement. 
-     const checkedCategory = checkBoxElement.input[checkBoxElement.dataset].value;
+  function showEWSCallsPerDayOnClick(){
+    //checkBoxElement = an array of element values.
+    //const checkBoxList = returns an array of the values selected.
 
-     const targetElements = document.querySelectorAll("[data-calls-per-day]");
+    //iterate through each value selected
+    //for each value in the array:
+    //remove the "hidden" attribute of the div, that contains the element attribute = "data-calls-per-day"
 
-      if (obj.value == "yes"){
-        document.getElementById("expiryDateContainer").hidden = false;
-        //TODO: add require to expiryDate input, to make this entry mandatory
+    const checkbox = document.querySelector("input[type=checkbox][name=ewsServices]");
+    const showCalls = document.querySelector("div[data-calls-per-day]");
+    showCalls.style.visibility = "hidden";
+    
+    
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        showCalls.style.visibility = "visible";
+        showCalls.value = '';
+      } else {
+        showCalls.style.visibility = "hidden";
       }
-      else {
-        document.getElementById("expiryDateContainer").hidden = true;
-      }
-        
-    }
+    });
+               
+  }
+     
+  /*
+    Hide/show div based on the value of the checkbox
+  */
+  function onEwsCheckboxClick(checkBoxElement){
+    //1. Get value of checkbox
+    console.log("!!!!");
+    const checkBoxChecked = checkBoxElement.checked;
+    //2. Get the divs to act on
+    const serviceElements = document.querySelectorAll(`div[data-ews=${checkBoxElement.id}]`);
+    //3. Foreach div, set the div as hidden=false
+    
+    serviceElements.forEach(serviceElement => {
+      //If checkBoxChecked = true, then serviceElement.hidden should be false
+      //If checkBoxChecked = false, then serviceElement.hidden should be true
+      serviceElement.hidden = !checkBoxChecked;
+    })
+    
+
+  }
+  
 
   /** 
     This function displays to the user the request as Non-production(nonProd) New by default
     @param dropDownElement The select elements from which to take the selected values
   */
   function showQuestionsOnchange(dropDownElement){
-    //TODO: create a variable/const called element node-list?, research
     
     const wantedCategory = dropDownElement.options[dropDownElement.selectedIndex].value;
     //returns all elements that have a data-category attribute. It doesn't care about the attribute value.
@@ -103,6 +131,7 @@
   */
   function getFormValue(formData) {
     //Get all the values from the form, but doesn't include input for multiple values such as checkboxes
+    //The Object.fromEntries() method transforms a list of key-value pairs into an object. 
     const formValue = Object.fromEntries(formData.entries());
 
     //The Object contains an array in topics that contains all the checked values
@@ -148,8 +177,10 @@
     //This will initialize the global event handlers (ie, onchange, etc) in the HTML, when it has finished loading
     //Fixed: When I refreshed the browser to retest the same data (cached data=YES), it was still set to yes but the date field was hidden
     document.addEventListener('DOMContentLoaded', (event)=> {
-      hideExpiryDateOnChange(document.getElementById("expireAcct"));
+      showExpiryDateOnChange(document.getElementById("expireAcct"));
       showQuestionsOnchange(document.getElementById("requestType"));
+      onEwsCheckboxClick(document.getElementById("wsaddress"));
+      //TODO: add onEwsCheckboxClick() for each checkBox (4?)
       //Can add other items here...
     })
   }
