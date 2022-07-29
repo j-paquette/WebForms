@@ -1,18 +1,19 @@
 class IssueApi {
-    /*
-  This function gets the form data entered by the user (as a parameter) and returns issueData
+  /**
+    This function gets the form data entered by the user (as a parameter) and returns issueData.
+    @param formValue The web form data formatted to markdown tables
  */
   getIssueData(formValue) {
     //TODO: change from Markdown to HTML table - see if this works. It'll be easier to identify the field values by id instead.
     const issueDataGCcode = {
-    title: `${formValue.environment}: Request access to ${formValue.ewsServices}`,
+    title: `${formValue.requestType}: Request access to ${formValue.ewsServices}`,
     confidential: "true",
-    labels: `New, ${formValue.environment}, ${formValue.ewsServices} `,
+    labels: `New, ${formValue.requestType}, ${formValue.ewsServices} `,
     description: `${formValue.appDesc}
   
   | Application Info | |
   | ------ | ------ |
-  | **Application Environment** | ${formValue.environment} |
+  | **Application Environment** | ${formValue.requestType} |
   | **CSD Application Name** | ${formValue.csdName} |
   | **CSD Acronym** | ${formValue.csdAcronym} |
   | **Application Type** | ${formValue.appType} |
@@ -39,17 +40,18 @@ class IssueApi {
       return issueDataGCcode;
    }
   
-    /*
+  /**
     This function creates a new issue in GCcode using the GitLab API, and return await response.json()
-    */
-    async createIssue(formValue) {
+    @param formValue The web form data and format it into markdown tables
+  */
+  async createIssue(formValue) {
   
-      const issueData = this.getIssueData(formValue);
+    const issueData = this.getIssueData(formValue);
   
-      const response = await fetch('https://gitlab.com/api/v4/projects/36888795/issues', {
-          method: 'POST',
-          cache: 'default',
-          headers: {
+    const response = await fetch('https://gitlab.com/api/v4/projects/36888795/issues', {
+        method: 'POST',
+        cache: 'default',
+        headers: {
               'Content-Type': 'application/json',
               //Uses PRIVATE-TOKEN to authorize creating a new issue thru the GitLab API
               'PRIVATE-TOKEN': 'glpat-8TZ_SsUyJYBh1N1-GkSg'
@@ -58,14 +60,15 @@ class IssueApi {
           body: JSON.stringify(issueData),
       });
   
-      const responseData = await response.json();
+    const responseData = await response.json();
   
-      return this.convertResponseValues(responseData);
-    }
+    return this.convertResponseValues(responseData);
+  }
   
-    /* 
+  /** 
     This function returns common response values specific to GCcode
-    */
+    @param responseData The GCcode api response values
+  */
     convertResponseValues(responseData){
       const resultValues = {
         issueUrl: responseData.web_url

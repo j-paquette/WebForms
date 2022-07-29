@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="styles/responsive-form.css" rel="stylesheet" />
+    <link href="styles/ews-web-request.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <title>Solution Design Services (SDS) - New Client Request</title>
 </head>
 <body>
 
-    <h2>New Request Form</h2>
+    <h2>EWS Request Form</h2>
     <p>Please note that this request, if fulfilled, will provide the application group with a domain service account. 
         It then becomes the responsibility of the application group to handle the service account in an appropriate manner. 
         Best practices dictate that network credentials stored in configuration files should always be encrypted.</p>
@@ -15,26 +15,32 @@
     
     <div class="container">
       <form id="mainForm" style="background-color:azure">
+        </fieldset>
         <fieldset>
-            <legend>Application Information</legend>
-            <div class="row">
-                <div class="col-25">
-                  <label for="environment">Application Environment <strong><abbr title="required">*</abbr></strong></label>
-                </div>
-                <div class="col-75">
-                  <select id="environment" name="environment">
-                    <option value="nonProd">Non-Production</option>
-                    <option value="prod">Production</option>
-                  </select>
-                </div>
-              </div>
+          <legend>Request Type</legend>
+          <div class="row">
+            <div class="col-25">
+              <label for="requestType">What type of Request do you need?<strong><abbr title="required">*</abbr></strong></label>
+            </div>
+            <div class="col-75">
+              <select id="requestType" name="requestType" onchange="showQuestionsOnchange(this)">
+                <option value="newNonProd">New request - Non-Production</option>
+                <option value="modifyNonProd">Modify request - Non-Production</option>
+                <option value="newProd">New request - Production</option>
+                <option value="modifyProd">Modify request - Production</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+            <legend>Application Information</legend> 
               <div class="row">
                <div class="col-25">
                 <label for="csdName">Application Name <strong><abbr title="required">*</abbr></strong></label>
                </div>
                <div class="col-75">
                 <input type="text" id="csdName" name="csdName" placeholder="The name listed in the Corporate Solutions Directory (CSD).." required>
-               </div>
+              </div>
              </div>
              <div class="row">
               <div class="col-25">
@@ -44,30 +50,158 @@
                 <input type="text" id="csdAcronym" name="csdAcronym" placeholder="The acronym listed in the CSD..">
               </div>
              </div>
-             <div class="row">
+             <div data-category="newProd,modifyProd" class="row" hidden>
               <div class="col-25">
-                <label for="appType">What type of application do you have?</label>
+                <label for="appVersion">Application Version<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="appType" name="appType">
-                  <option value="windowsApp">Windows Application</option>
-                  <option value="windowsService">Windows Service</option>
-                  <option value="windowsSmartClient">Windows Smart Client</option>
-                  <option value="webApplication">Web Application</option>
-                  <option value="webService">Web Service</option>
-                  <option value="otherType">other</option>
+                <input type="text" id="appVersion" name="appVersion" placeholder="The most recent release or incoming release..">
+              </div>
+             </div>
+             <div data-category="newProd" class="row" hidden>
+              <div class="col-25">
+                <label for="appANPR">Application RFC (ANPR)<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="appANPR" name="appANPR" placeholder="The most recent release or incoming release..">
+              </div>
+              </div>
+              <div data-category="newProd" class="row" hidden>
+                <div class="col-25">
+                  <label for="implementDate">Expected Implementation Date<strong><abbr title="required">*</abbr></strong></label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="implementDate" name="implementDate" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" placeholder="YYYY-MM-YY">
+                </div>
+              </div>
+             <div class="row">
+                <div class="col-25">
+                  <label for="appType">What type of application do you have?</label>
+                </div>
+                <div class="col-75">
+                  <select id="appType" name="appType">
+                    <option value="windowsApp">Windows Application</option>
+                    <option value="windowsService">Windows Service</option>
+                    <option value="windowsSmartClient">Windows Smart Client</option>
+                    <option value="webApplication">Web Application</option>
+                    <option value="webService">Web Service</option>
+                    <option value="otherType">other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="appZone">Which zone is your application located?</label>
+                </div>
+                <div class="col-75">
+                  <select id="appZone" name="appZone">
+                    <option value="intranet">Intranet</option>
+                    <option value="internet">Internet (DMZ/OPS/Intranet)</option>
+                  </select>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="existInProd">Is the Application already in production?<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <select id="existInProd" name="existInProd">
+                  <option value="noChoice">Select one..</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
                 </select>
+              </div>
+            </div>
+            <div data-category="modifyProd" class="row" hidden>
+              <div class="col-25">
+                <label for="appSupportWeekday">If yes, what are the week-day Application support hours?</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="appSupportWeekday" name="appSupportWeekday" placeholder="The week-day application support hours..">
+              </div>
+            </div>
+            <div data-category="modifyProd" class="row" hidden>
+              <div class="col-25">
+                <label for="appSupportWeekend">If yes, what are the week-end Application support hours?</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="appSupportWeekend" name="appSupportWeekend" placeholder="The week-end application support hours..">
+              </div>
+            </div>
+            <div data-category="modifyProd" class="row" hidden>
+              <div class="col-25">
+                <label for="criticality">If yes, what is the criticality classification of your Application?</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="criticality" name="criticality" placeholder="The criticality classification of your Application..">
+              </div>
+            </div>
+            <div data-category="modifyProd" class="row" hidden>
+              <div class="col-25">
+                <label for="supportCoverage">If yes, what is the incident support coverage of your Application?</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="supportCoverage" name="supportCoverage" placeholder="The incident support coverage of your Application..">
+              </div>
+            </div> 
+            <div data-category="newProd" class="row" hidden>
+              <div class="col-25">
+                <label for="appHostSite">Hosting site for the Application<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="appHostSite" name="appHostSite" placeholder="The hosting site for the application..">
+              </div>
+            </div>
+            <div data-category="newProd" class="row" hidden>
+              <div class="col-25">
+                <label for="dbHostSite">Hosting site for the Database<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="dbHostSite" name="dbHostSite" placeholder="If the application is using WSDBLink..">
+              </div>
+            </div>
+            <div data-category="newProd" class="row" hidden>
+              <div class="col-25">
+                <label for="uniqueApp">Is there anything special with your application (from a usage point of view)?<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <select id="uniqueApp" name="uniqueApp">
+                  <option value="noChoice">Select one..</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+            <div data-category="newProd" class="row" hidden>
+              <div class="col-25">
+                <label for="uniqueAppDetails">If yes, please provide details</label>
+              </div>
+              <div class="col-75">
+                <textarea id="uniqueAppDetails" name="uniqueAppDetails" placeholder="Enter the details of the special instructions for your application.." style="height:200px"></textarea>
               </div>
             </div>
             <div class="row">
               <div class="col-25">
-                <label for="appZone">Which zone is your application located?</label>
+                <label for="teamName">Project Team Name<strong><abbr title="required">*</abbr></strong></label>
               </div>
               <div class="col-75">
-                <select id="appZone" name="appZone">
-                  <option value="intranet">Intranet</option>
-                  <option value="internet">Internet (DMZ/OPS/Intranet)</option>
-                </select>
+                <input type="text" id="teamName" name="teamName" placeholder="Enter your project team name..">
+              </div> 
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="teamDistList">Distribution List for the Application Group<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="teamDistList" name="teamDistList" placeholder="Enter the distribution list for the application group..">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="csdUrl">Url to your project in CSD (Corporate Solutions Directory)<strong><abbr title="required">*</abbr></strong></label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="csdUrl" name="csdUrl" placeholder="Add the CSD Url for your project..">
               </div>
             </div>
             <div class="row">
@@ -89,55 +223,55 @@
               <input type="text" id="dirName" name="dirName" placeholder="The name of the director listed in the CSD..">
             </div>
            </div>
-           <div class="row">
+          <div class="row">
             <div class="col-25">
               <label for="dirEmail">Director's Email <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
               <input type="email" id="dirEmail" name="dirEmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The director's email address..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <label for="mgrName">Manager's Name <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
               <input type="text" id="mgrName" name="mgrName" placeholder="The name of the manager listed in the CSD..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <label for="mgrEmail">Manager's Email <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
               <input type="email" id="mgrEmail" name="mgrEmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The manager's email address..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <label for="tlName">Team Lead's Name <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
               <input type="text" id="tlName" name="tlName" placeholder="The name of the team lead listed in the CSD..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <label for="tlEmail">Team Lead's Email <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
               <input type="email" id="tlEmail" name="tlEmail" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="The team lead's email address..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <label for="addNames">Additional Contact Name(s)</label>
             </div>
             <div class="col-75">
               <input type="text" id="addNames" name="addNames" placeholder="Any additional contact name(s) listed in the CSD..">
             </div>
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <div class="col-25">
               <!--TODO: add functionality to check if id="addnames" has a value(s). If so, then the email address should be mandatory-->
               <label for="addMails">Additional Contact Email(s) </label>
@@ -147,7 +281,7 @@
               <!--TODO: change the input type=text to add additional emails??-->
               <input type="email" id="addMails" name="addMails" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" placeholder="Any additional contact names email address(es)..">
             </div>
-           </div>    
+          </div>    
         </fieldset>
         <fieldset>
           <legend>EWS Information</legend>
@@ -156,27 +290,131 @@
               <label for="ewsName">Which service(s) do you need access to? <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
-              <div>
-                <!--TODO: add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsAddress" name="ewsServices" value="WSAddress">
-                <label for="wsAddress">WSAddress</label>
-              </div>
-              <div>
-                <!--TODO: add functionality, if user checks WSEMail they need to add additional information: Internal email access/Internal & external email access/No-->
-                <!--TODO: add functionality, if user checks WSEMail they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsEmail" name="ewsServices" value="WSEMail">
-                <label for="wsEmail">WSEMail</label>
-              </div>
-              <div>
-                <!--TODO: add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsed" name="ewsServices" value="WSED">
-                <label for="wsed">WSED</label>
-              </div>
-              <div>
-                <!--TODO: add functionality, if user checks WSDBLink they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsDbLink" name="ewsServices" value="WSDBLink">
-                <label for="wsDbLink">WSDBLink</label>
-              </div>
+              <input type="checkbox" id="wsaddress" name="ewsServices" value="wsaddress" onchange="onEwsCheckboxClick(this)">
+              <label for="wsaddress">WSAddress</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsaddress" hidden>
+            <div class="col-25">
+              <label for="wsaddressWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsaddressWeekendCalls" name="wsaddressWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsaddress" hidden>
+            <div class="col-25">
+              <label for="wsaddressWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsaddressWeekdayCalls" name="wsaddressWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsaddress" hidden>
+            <div class="col-25">
+              <label for="wsaddressBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsaddressBusyCalls" name="wsaddressBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsName"></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="wsemail" name="ewsServices" value="wsemail" onchange="onEwsCheckboxClick(this)">
+              <label for="wsemail">WSEMail</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsemailWeekendCalls" name="wsemailWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsemailWeekdayCalls" name="wsemailWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsemailBusyCalls" name="wsemailBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsName"></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="wsed" name="ewsServices" value="wsed" onchange="onEwsCheckboxClick(this)">
+              <label for="wsed">WSED</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsedWeekendCalls" name="wsedWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsedWeekdayCalls" name="wsedWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsedBusyCalls" name="wsedBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsName"></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="wsdblink" name="ewsServices" value="wsdblink" onchange="onEwsCheckboxClick(this)">
+              <label for="wsdblink">WSDBLink</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsdblinkWeekendCalls" name="wsdblinkWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsdblinkWeekdayCalls" name="wsdblinkWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsdblinkBusyCalls" name="wsdblinkBusyCalls" placeholder="From 1 to 10000..">
             </div>
           </div>
           <div class="row">
@@ -185,7 +423,7 @@
               <label for="expireAcct">Should the account expire?</label>
             </div>
             <div class="col-75">
-              <select id="expireAcct" name="expireAcct" onchange="hideExpiryDateOnChange(this);">
+              <select id="expireAcct" name="expireAcct" onchange="showExpiryDateOnChange(this);">
                 <option value="noChoice">Select one..</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
