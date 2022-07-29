@@ -8,7 +8,7 @@ class IssueApi {
     const issueDataGCcode = {
     title: `${formValue.requestType}: Request access to ${formValue.ewsServices}`,
     confidential: "true",
-    labels: `New, ${formValue.environment}, ${formValue.ewsServices} `,
+    labels: `New, ${formValue.requestType}, ${formValue.ewsServices} `,
     description: `${formValue.appDesc}
   
   | Application Info | |
