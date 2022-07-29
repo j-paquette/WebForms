@@ -290,10 +290,9 @@
               <label for="ewsName">Which service(s) do you need access to? <strong><abbr title="required">*</abbr></strong></label>
             </div>
             <div class="col-75">
-                <!--TODO: add functionality, if user checks WSAddress they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsaddress" name="ewsServices" value="wsaddress" onchange="onEwsCheckboxClick(this)">
-                <label for="wsaddress">WSAddress</label>
-              </div>
+              <input type="checkbox" id="wsaddress" name="ewsServices" value="wsaddress" onchange="onEwsCheckboxClick(this)">
+              <label for="wsaddress">WSAddress</label>
+            </div>
           </div>
           <div class="row" data-ews="wsaddress" hidden>
             <div class="col-25">
@@ -303,65 +302,120 @@
                 <input type="number" id="wsaddressWeekendCalls" name="wsaddressWeekendCalls" placeholder="From 1 to 10000..">
             </div>
           </div>
+          <div class="row" data-ews="wsaddress" hidden>
+            <div class="col-25">
+              <label for="wsaddressWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsaddressWeekdayCalls" name="wsaddressWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsaddress" hidden>
+            <div class="col-25">
+              <label for="wsaddressBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsaddressBusyCalls" name="wsaddressBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
           <div class="row">
             <div class="col-25">
+              <label for="ewsName"></label>
             </div>
-            <div class="col-75"> 
-              
-              <div>
-                <!--TODO: add functionality, if user checks WSEMail they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsemail" name="ewsServices" value="wsemail" onchange="onEwsCheckboxClick(this)">
-                <label for="wsemail">WSEMail</label>
-              </div>
-                <!--TODO: add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-              <div data-ews="wsemail">
-                <label for="wsemailWeekendCalls">Expected # of calls per day (Typical weekend day)</label>
+            <div class="col-75">
+              <input type="checkbox" id="wsemail" name="ewsServices" value="wsemail" onchange="onEwsCheckboxClick(this)">
+              <label for="wsemail">WSEMail</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
                 <input type="number" id="wsemailWeekendCalls" name="wsemailWeekendCalls" placeholder="From 1 to 10000..">
-              </div>
-              <div data-ews="wsemail">
-                <label for="wsemailWeekdayCalls">Expected # of calls per day (Typical work day)</label>
-                <input type="number" id="wsemailWeekdayCalls" name="wsemailWeekdayCalls" placeholder="From 1 to 10000..">
-              </div>
-              <div data-ews="wsemail">
-                <label for="wsemailBusyCalls">Expected # of calls per day (Busy work day)</label>
-                <input type="number" id="wsemailBusyCalls" name="wsemailBusyCalls" placeholder="From 1 to 10000..">
-              </div>
-              <div>
-                <!--TODO: add functionality, if user checks WSED they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsed" name="ewsServices" value="wsed">
-                <label for="wsed">WSED</label>
-              </div>
-              <div data-ews="wsed">
-                <input type="number" id="wsedWeekendCalls" name="wsedWeekendCalls" placeholder="From 1 to 10000..">
-                <label for="wsedWeekendCalls">Expected # of calls per day (Typical weekend day)</label>
-              </div>
-              <div data-ews="wsed">
-                <input type="number" id="wsedWeekdayCalls" name="wsedWeekdayCalls" placeholder="From 1 to 10000..">
-                <label for="wsedWeekdayCalls">Expected # of calls per day (Typical work day)</label>
-              </div>
-              <div data-ews="wsed">
-                <input type="number" id="wsedBusyCalls" name="wsedBusyCalls" placeholder="From 1 to 10000..">
-                <label for="wsedBusyCalls">Expected # of calls per day (Busy work day)</label>
-              </div>
-              <div>
-                <!--TODO: add functionality, if user checks WSDBLink they need to add additional information: Expected number of calls/day (typical/busy/weekends)-->
-                <input type="checkbox" id="wsdblink" name="ewsServices" value="wsdblink">
-                <label for="wsdblink">WSDBLink</label>
-              </div>
-              <div data-calls-per-day="wsdblink">
-                <input type="number" id="wsdblinkWeekendCalls" name="wsdblinkWeekendCalls" placeholder="From 1 to 10000..">
-                <label for="wsdblinkWeekendCalls">Expected # of calls per day (Typical weekend day)</label>
-              </div>
-              <div data-calls-per-day="wsdblink">
-                <input type="number" id="wsdblinkWeekdayCalls" name="WSDBLinkWeekdayCalls" placeholder="From 1 to 10000..">
-                <label for="WSDBLinkWeekdayCalls">Expected # of calls per day (Typical work day)</label>
-              </div>
-              <div data-calls-per-day="wsdblink">
-                <input type="number" id="wsdblinkBusyCalls" name="wsdblinkBusyCalls" placeholder="From 1 to 10000..">
-                <label for="wsdblinkBusyCalls">Expected # of calls per day (Busy work day)</label>
-              </div>
             </div>
-        </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsemailWeekdayCalls" name="wsemailWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsemail" hidden>
+            <div class="col-25">
+              <label for="wsemailBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsemailBusyCalls" name="wsemailBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsName"></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="wsed" name="ewsServices" value="wsed" onchange="onEwsCheckboxClick(this)">
+              <label for="wsed">WSED</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsedWeekendCalls" name="wsedWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsedWeekdayCalls" name="wsedWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsed" hidden>
+            <div class="col-25">
+              <label for="wsedBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsedBusyCalls" name="wsedBusyCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="ewsName"></label>
+            </div>
+            <div class="col-75">
+              <input type="checkbox" id="wsdblink" name="ewsServices" value="wsdblink" onchange="onEwsCheckboxClick(this)">
+              <label for="wsdblink">WSDBLink</label>
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkWeekendCalls">Expected # of calls per day <br> (Typical weekend day)</label>
+            </div>
+            <div class="col-75">   
+                <input type="number" id="wsdblinkWeekendCalls" name="wsdblinkWeekendCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkWeekdayCalls">Expected # of calls per day <br> (Typical work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsdblinkWeekdayCalls" name="wsdblinkWeekdayCalls" placeholder="From 1 to 10000..">
+            </div>
+          </div>
+          <div class="row" data-ews="wsdblink" hidden>
+            <div class="col-25">
+              <label for="wsdblinkBusyCalls">Expected # of calls per day <br> (Busy work day)</label>
+            </div>
+            <div class="col-75">
+              <input type="number" id="wsdblinkBusyCalls" name="wsdblinkBusyCalls" placeholder="From 1 to 10000..">
+            </div>
           </div>
           <div class="row">
             <div class="col-25">

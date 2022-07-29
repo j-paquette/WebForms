@@ -6,14 +6,14 @@ class IssueApi {
   getIssueData(formValue) {
     //TODO: change from Markdown to HTML table - see if this works. It'll be easier to identify the field values by id instead.
     const issueDataGCcode = {
-    title: `${formValue.environment}: Request access to ${formValue.ewsServices}`,
+    title: `${formValue.requestType}: Request access to ${formValue.ewsServices}`,
     confidential: "true",
     labels: `New, ${formValue.environment}, ${formValue.ewsServices} `,
     description: `${formValue.appDesc}
   
   | Application Info | |
   | ------ | ------ |
-  | **Application Environment** | ${formValue.environment} |
+  | **Application Environment** | ${formValue.requestType} |
   | **CSD Application Name** | ${formValue.csdName} |
   | **CSD Acronym** | ${formValue.csdAcronym} |
   | **Application Type** | ${formValue.appType} |

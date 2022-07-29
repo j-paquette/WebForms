@@ -11,13 +11,13 @@ class IssueApi {
           "op": "add",
           "path": "/fields/System.Title",
           "from": null,
-          "value": `${formValue.environment}: Request access to ${formValue.ewsServices}`
+          "value": `${formValue.requestType}: Request access to ${formValue.ewsServices}`
         },
         {
           "op": "add",
           "path": "/fields/System.Tags",
           "from": null,
-          "value": `New Account, ${formValue.environment}, ${formValue.ewsServices}` 
+          "value": `New Account, ${formValue.requestType}, ${formValue.ewsServices}` 
         },
         {
           "op": "add",
@@ -75,7 +75,7 @@ caption {
             <tbody>
               <tr>
                 <th id="environment" class="row-header" scope="row">Application Environment</th>
-                <td>${formValue.environment}</td>
+                <td>${formValue.requestType}</td>
               </tr>
               <tr>
                 <th id="csdName" class="row-header" scope="row">CSD Application Name</th>

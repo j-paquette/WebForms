@@ -79,12 +79,10 @@
   */
   function onEwsCheckboxClick(checkBoxElement){
     //1. Get value of checkbox
-    console.log("!!!!");
     const checkBoxChecked = checkBoxElement.checked;
     //2. Get the divs to act on
     const serviceElements = document.querySelectorAll(`div[data-ews=${checkBoxElement.id}]`);
     //3. Foreach div, set the div as hidden=false
-    
     serviceElements.forEach(serviceElement => {
       //If checkBoxChecked = true, then serviceElement.hidden should be false
       //If checkBoxChecked = false, then serviceElement.hidden should be true
@@ -180,6 +178,9 @@
       showExpiryDateOnChange(document.getElementById("expireAcct"));
       showQuestionsOnchange(document.getElementById("requestType"));
       onEwsCheckboxClick(document.getElementById("wsaddress"));
+      onEwsCheckboxClick(document.getElementById("wsemail"));
+      onEwsCheckboxClick(document.getElementById("wsed"));
+      onEwsCheckboxClick(document.getElementById("wsdblink"));
       //TODO: add onEwsCheckboxClick() for each checkBox (4?)
       //Can add other items here...
     })
